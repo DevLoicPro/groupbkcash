@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Elite - GROUPBKCASH</title>
+    <meta name="description" content="Accédez à votre espace bancaire sécurisé GROUPBKCASH.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --login-bg: #FFFFFF;
+            --input-border: #E5E7EB;
+            --input-focus: #000000;
+            --text-main: #0A0A0A;
+            --text-muted: #9CA3AF;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-header {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .header-right a {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9CA3AF;
+        }
+
+        .login-main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: #FFFFFF;
+            width: 100%;
+            max-width: 450px;
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.02);
+            border: 1px solid #F3F4F6;
+            text-align: center;
+        }
+
+        .login-title-group h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .login-title-group p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .forgot-link {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #FF6600;
+            letter-spacing: 0.05em;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i.prefix-icon {
+            position: absolute;
+            left: 1rem;
+            width: 18px;
+            height: 18px;
+            color: #D1D5DB;
+        }
+
+        .input-wrapper i.suffix-icon {
+            position: absolute;
+            right: 1rem;
+            width: 18px;
+            height: 18px;
+            color: #D1D5DB;
+            cursor: pointer;
+        }
+
+        .login-control {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: #FAFAFA;
+            transition: all 0.2s ease;
+        }
+
+        .login-control:focus {
+            outline: none;
+            border-color: #000;
+            background: #fff;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #000000;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            padding: 1.1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #222;
+            transform: translateY(-1px);
+        }
+
+        .new-account {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .new-account a {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .login-footer {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .encryption-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #F3F4F6;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .encryption-badge i {
+            color: #10B981;
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-copyright {
+            font-size: 0.65rem;
+            color: #D1D5DB;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        @media (max-width: 768px) {
+            .login-header {
+                padding: 1.5rem 2rem;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            .login-card {
+                padding: 2.5rem 1.5rem;
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="login-header">
+        <a href="index.html" class="logo">
+            <span class="logo-icon"><i data-lucide="wallet"></i></span>
+            <span class="logo-text">GROUPBK<span>CASH</span></span>
+        </a>
+        <div class="header-right">
+            <a href="#">Assistance</a>
+            <a href="#">Sécurité</a>
+        </div>
+    </header>
+
+    <main class="login-main">
+        <div class="login-card">
+            <div class="login-title-group">
+                <h1>Connexion Elite</h1>
+                <p>Accédez à votre espace bancaire sécurisé</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="identifier">Identifiant</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="prefix-icon"></i>
+                        <input type="text" id="identifier" class="login-control" placeholder="Votre identifiant"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="password">Mot de passe</label>
+                        <a href="#" class="forgot-link">Oublié ?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock" class="prefix-icon"></i>
+                        <input type="password" id="password" class="login-control" placeholder="••••••••" required>
+                        <i data-lucide="eye" class="suffix-icon" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">Se connecter</button>
+            </form>
+
+            <div class="new-account">
+                Nouveau sur la plateforme ? <a href="register.html">Créer un compte</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="login-footer">
+        <div class="encryption-badge">
+            <i data-lucide="check-circle"></i>
+            Cryptage bancaire 256-bit actif
+        </div>
+        <div class="footer-copyright">
+            © 2024 GROUPBKCASH BANQUE. PREMIUM SERVICE.
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Password visibility toggle
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.setAttribute('data-lucide', type === 'password' ? 'eye' : 'eye-off');
+            lucide.createIcons();
+        });
+
+        // Form handling
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = 'Connexion...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Erreur de connexion : Identifiant ou mot de passe incorrect.');
+                btn.innerHTML = 'Se connecter';
+                btn.disabled = false;
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

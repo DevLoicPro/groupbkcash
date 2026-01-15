@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Officielle - GROUPBKCASH</title>
+    <meta name="description" content="Initialisez votre dossier bancaire haute performance chez GROUPBKCASH.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --form-bg: #FFFFFF;
+            --input-border: #E5E7EB;
+            --input-focus: #FF6600;
+            --admin-msg-bg: #EEF2FF;
+            --admin-msg-text: #4F46E5;
+            --muted-small: #9CA3AF;
+        }
+
+        body {
+            background-color: #FDFDFD;
+        }
+
+        .register-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .header-left .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+
+        .header-right .premium-portal {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6B7280;
+            padding-right: 1.5rem;
+            border-right: 1px solid #E5E7EB;
+        }
+
+        .header-right .login-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1A1A1A;
+        }
+
+        .register-container {
+            max-width: 800px;
+            margin: 2rem auto 4rem;
+            padding: 0 1rem;
+        }
+
+        .form-title-group {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-title-group h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #0A0A0A;
+        }
+
+        .form-title-group p {
+            color: #6B7280;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .registration-card {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 4px 60px rgba(0, 0, 0, 0.03);
+            border: 1px solid #F3F4F6;
+            padding: 3rem;
+        }
+
+        .form-section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .section-header i {
+            width: 20px;
+            height: 20px;
+            color: #9CA3AF;
+        }
+
+        .section-header h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9CA3AF;
+            font-weight: 700;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 3;
+        }
+
+        .form-group.two-thirds {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #4B5563;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #1A1A1A;
+            background: #FAFAFA;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--input-focus);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.05);
+        }
+
+        .form-control::placeholder {
+            color: #9CA3AF;
+            font-weight: 400;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            padding-right: 2.5rem;
+        }
+
+        .admin-validation {
+            background-color: var(--admin-msg-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-validation i {
+            color: var(--admin-msg-text);
+            margin-top: 0.2rem;
+        }
+
+        .admin-validation-content h3 {
+            font-size: 0.95rem;
+            color: var(--admin-msg-text);
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .admin-validation-content p {
+            font-size: 0.8rem;
+            color: #6366F1;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #0D0D0D;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #262626;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .form-footer-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-footer-note a {
+            color: #4B5563;
+            text-decoration: underline;
+        }
+
+        .identifiez-vous {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+        }
+
+        .identifiez-vous a {
+            color: #0A0A0A;
+            font-weight: 700;
+        }
+
+        .final-footer {
+            margin-top: 6rem;
+            padding-bottom: 3rem;
+            border-top: 1px solid #F3F4F6;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width,
+            .form-group.two-thirds {
+                grid-column: span 1;
+            }
+
+            .registration-card {
+                padding: 1.5rem;
+            }
+
+            .register-header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .header-right .premium-portal {
+                display: none;
+            }
+
+            .final-footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="register-header">
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-icon"><i data-lucide="wallet"></i></span>
+                <span class="logo-text">GROUPBK<span>CASH</span></span>
+            </a>
+        </div>
+        <div class="header-right">
+            <span class="premium-portal">Portail d'ouverture de compte premium</span>
+            <a href="login.html" class="login-link">
+                <i data-lucide="user-circle"></i>
+                Se connecter
+            </a>
+        </div>
+    </header>
+
+    <main class="register-container">
+        <div class="form-title-group">
+            <h1>Inscription Officielle</h1>
+            <p>Veuillez renseigner les informations ci-dessous pour initialiser votre dossier bancaire haute
+                performance.</p>
+        </div>
+
+        <form class="registration-form" id="registrationForm">
+            <div class="registration-card">
+
+                <!-- Section 01 -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i data-lucide="user"></i>
+                        <h2>01. INFORMATIONS PERSONNELLES</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="civility">Civilité</label>
+                            <select id="civility" class="form-control" required>
+                                <option value="Monsieur">Monsieur</option>
+                                <option value="Madame">Madame</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Nom de naissance</label>
+                            <input type="text" id="last_name" class="form-control" placeholder="ex: DUPONT" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">Prénom</label>
+                            <input type="text" id="first_name" class="form-control" placeholder="ex: Jean-Pierre"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nationality">Nationalité</label>
+                            <input type="text" id="nationality" class="form-control" placeholder="Française" required>
+                        </div>
+                        <div class="form-group two-thirds">
+                            <label for="marital_status">Situation matrimoniale</label>
+                            <select id="marital_status" class="form-control" required>
+                                <option value="Celibataire">Célibataire</option>
+                                <option value="Marie">Marié(e)</option>
+                                <option value="Pacse">Pacsé(e)</option>
+                                <option value="Divorce">Divorcé(e)</option>
+                                <option value="Veuf">Veuf/Veuve</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 02 -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i data-lucide="map-pin"></i>
+                        <h2>02. COORDONNÉES</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group two-thirds">
+                            <label for="phone">Téléphone mobile</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+33 6 00 00 00 00" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" id="email" class="form-control" placeholder="contact@domaine.com"
+                                required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="address">Adresse de domicile</label>
+                            <input type="text" id="address" class="form-control"
+                                placeholder="15 Avenue des Champs-Élysées, 75008 Paris" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 03 -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i data-lucide="briefcase"></i>
+                        <h2>03. SITUATION PROFESSIONNELLE & FINANCIÈRE</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group two-thirds">
+                            <label for="profession">Profession</label>
+                            <input type="text" id="profession" class="form-control"
+                                placeholder="Cadre supérieur, Indépendant..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income">Revenu mensuel net</label>
+                            <div style="position: relative;">
+                                <input type="number" id="income" class="form-control" placeholder="5000" required>
+                                <span
+                                    style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #9CA3AF;">€</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 04 -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i data-lucide="shield"></i>
+                        <h2>04. SÉCURITÉ DU COMPTE</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group two-thirds">
+                            <label for="security_question">Question de sécurité</label>
+                            <select id="security_question" class="form-control" required>
+                                <option value="mother">Nom de jeune fille de votre mère ?</option>
+                                <option value="pet">Nom de votre premier animal ?</option>
+                                <option value="city">Votre ville de naissance ?</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="security_answer">Réponse</label>
+                            <input type="text" id="security_answer" class="form-control"
+                                placeholder="Votre réponse secrète" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirmation du mot de passe</label>
+                            <input type="password" id="confirm_password" class="form-control" placeholder="••••••••"
+                                required>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="admin-validation">
+                    <i data-lucide="check-circle-2"></i>
+                    <div class="admin-validation-content">
+                        <h3>Validation administrative</h3>
+                        <p>Pour garantir l'intégrité de notre réseau, chaque demande d'adhésion est soumise à une revue
+                            manuelle. Le délai de traitement moyen est de 24 heures.</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    CRÉER MON COMPTE
+                    <i data-lucide="arrow-right"></i>
+                </button>
+
+                <div class="form-footer-note">
+                    En cliquant sur "Créer mon compte", vous confirmez avoir pris connaissance de notre
+                    <a href="#">Politique de Confidentialité</a> et de nos conditions générales d'utilisation.
+                    Vos données sont cryptées (AES-256).
+                </div>
+            </div>
+        </form>
+
+        <div class="identifiez-vous">
+            Déjà membre ? <a href="login.html">Identifiez-vous</a>
+        </div>
+    </main>
+
+    <footer class="final-footer">
+        <div>© 2024 GROUPBKCASH. TOUS DROITS RÉSERVÉS.</div>
+        <div class="footer-badges">
+            <div class="footer-badge">
+                <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
+                SECURE SSL
+            </div>
+            <div class="footer-badge">
+                <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
+                GDPR COMPLIANT
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Basic form handling
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalContent = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Traitement en cours...';
+
+            setTimeout(() => {
+                alert('Félicitations ! Votre demande d\'ouverture de compte a été soumise avec succès.');
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>
