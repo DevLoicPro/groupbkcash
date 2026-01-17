@@ -21,29 +21,8 @@
 </head>
 
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                <span class="logo-text">GROUPBK<span>CASH</span></span>
-            </a>
-
-            <ul class="nav-links">
-                <li><a href="index.html">Particuliers</a></li>
-                <li><a href="professions-liberales.html">Professionnels</a></li>
-                <li><a href="nos-cartes.html" class="active">Nos Cartes</a></li>
-                <li><a href="about.html">Qui sommes-nous</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">Me connecter</a>
-                <a href="register.html" class="btn btn-primary">Ouvrir mon compte</a>
-            </div>
-
-            <button class="mobile-menu-toggle">
-                <i data-lucide="menu"></i>
-            </button>
-        </nav>
+    <header id="main-header" class="header">
+        <!-- Header will be injected by js/layout.js -->
     </header>
 
     <main>
@@ -64,16 +43,15 @@
         </header>
 
         <!-- Cards Showcase -->
-        <section class="cards-showcase container" style="padding: 6rem 0;">
+        <section class="cards-showcase section container">
             <div class="services-header">
                 <h2 class="section-title-center">Une carte bancaire 100% sécurisée et personnalisable</h2>
                 <p>Classique, Premier, Platinum ... Choisissez la carte qui vous convient.</p>
             </div>
 
-            <div class="features-grid" style="margin-top: 4rem;">
+            <div class="features-grid cards-features">
                 <div class="features-text">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--primary);">Les plus de nos cartes(1)
-                    </h3>
+                    <h3 class="subsection-title">Les plus de nos cartes(1)</h3>
                     <div class="feature-items">
                         <div class="feature-item">
                             <div class="feature-icon icon-blue"><i data-lucide="shopping-cart"></i></div>
@@ -107,9 +85,8 @@
                 </div>
 
                 <div class="management-column">
-                    <div class="card-dark" style="height: 100%;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 2.5rem; color: var(--white);">Une gestion en toute
-                            simplicité(3)</h3>
+                    <div class="card-dark">
+                        <h3 class="subsection-title-white">Une gestion en toute simplicité(3)</h3>
                         <ul class="management-list">
                             <li>
                                 <div class="list-icon"><i data-lucide="trending-up"></i></div>
@@ -128,8 +105,7 @@
                                 <span>Apple Pay & Samsung Pay</span>
                             </li>
                         </ul>
-                        <div
-                            style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6;">
+                        <div class="card-dark-footer">
                             <p>(1) Cartes VISA GROUPBKCASH Banque&moi, Premier, Platinum et Infinite.</p>
                             <p>(3) Réservé aux abonnés GROUPBKCASH BanqueConnect.</p>
                         </div>
@@ -195,18 +171,15 @@
         </section>
 
         <!-- Did you know? -->
-        <section class="info-section container" style="padding: 4rem 0;">
-            <div class="feature-item"
-                style="background: var(--bg-light); border-radius: 24px; padding: 3rem; display: flex; align-items: center; gap: 3rem;">
-                <div class="feature-icon"
-                    style="width: 80px; height: 80px; background: var(--white); border-radius: 50%; color: var(--primary); box-shadow: var(--shadow);">
-                    <i data-lucide="help-circle" style="width: 40px; height: 40px;"></i>
+        <section class="info-section section container">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i data-lucide="help-circle"></i>
                 </div>
-                <div>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Le saviez-vous ?</h3>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">Vous avez oublié le code PIN de votre carte
-                        bancaire ? Vous pouvez le retrouver en toute sécurité, depuis votre appli GROUPBKCASH Banque !
-                    </p>
+                <div class="info-text">
+                    <h3>Le saviez-vous ?</h3>
+                    <p>Vous avez oublié le code PIN de votre carte bancaire ? Vous pouvez le retrouver en toute
+                        sécurité, depuis votre appli GROUPBKCASH Banque !</p>
                 </div>
             </div>
         </section>
@@ -218,78 +191,17 @@
                 <h3 class="gradient-text">Une carte bancaire, Une appli, Un conseiller dédié</h3>
                 <div class="hero-btns">
                     <a href="register.html" class="btn btn-dark">J'ouvre un compte bancaire</a>
-                    <a href="register.html" class="btn btn-outline"
-                        style="border-color: var(--dark);">Contactez-nous</a>
+                    <a href="register.html" class="btn btn-outline dark-border">Contactez-nous</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                        <span class="logo-text">GROUPBK<span>CASH</span></span>
-                    </div>
-                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
-                        humaine préservée.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>L'OFFRE</h4>
-                    <ul>
-                        <li><a href="index.html">Particuliers</a></li>
-                        <li><a href="professions-liberales.html">Professionnels</a></li>
-                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                        <li><a href="register.html">Ouvrir un compte</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>PRATIQUE</h4>
-                    <ul>
-                        <li><a href="#">Tarifs</a></li>
-                        <li><a href="#">Aide & FAQ</a></li>
-                        <li><a href="#">Sécurité</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>GROUPBKCASH</h4>
-                    <ul>
-                        <li><a href="about.html">Qui sommes-nous ?</a></li>
-                        <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Presse</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-legal">
-                <p>(1) Offre valable pour toute première ouverture d'un compte individuel ou joint chez GROUPBKCASH.</p>
-                <p>(2) Sous réserve d'acceptation de votre dossier par GROUPBKCASH.</p>
-
-                <div class="footer-bottom">
-                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
-                    <div class="legal-links">
-                        <a href="#">MENTIONS LÉGALES</a>
-                        <a href="#">CONFIDENTIALITÉ</a>
-                        <a href="#">COOKIES</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer id="main-footer" class="footer">
+        <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Initialize Lucide icons

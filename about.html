@@ -21,29 +21,8 @@
 </head>
 
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                <span class="logo-text">GROUPBK<span>CASH</span></span>
-            </a>
-
-            <ul class="nav-links">
-                <li><a href="index.html">Particuliers</a></li>
-                <li><a href="professions-liberales.html">Professionnels</a></li>
-                <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                <li><a href="about.html" class="active">Qui sommes-nous</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">Me connecter</a>
-                <a href="register.html" class="btn btn-primary">Ouvrir mon compte</a>
-            </div>
-
-            <button class="mobile-menu-toggle">
-                <i data-lucide="menu"></i>
-            </button>
-        </nav>
+    <header id="main-header" class="header">
+        <!-- Header will be injected by js/layout.js -->
     </header>
 
     <main>
@@ -64,7 +43,7 @@
         </section>
 
         <!-- Partner Section -->
-        <section class="about-intro container">
+        <section class="about-intro section container">
             <div class="about-grid">
                 <div class="about-text">
                     <h2 class="section-title">Un banquier partenaire de confiance, où que vous soyez</h2>
@@ -99,7 +78,7 @@
         </section>
 
         <!-- Team Section -->
-        <section class="team-section">
+        <section class="team-section section">
             <div class="container">
                 <h2 class="section-title-center">Une équipe à vos côtés</h2>
                 <div class="team-grid">
@@ -125,7 +104,7 @@
         </section>
 
         <!-- Group Entity -->
-        <section class="group-entity container">
+        <section class="group-entity section container">
             <div class="group-content">
                 <div class="group-text">
                     <span class="badge">NOTRE ADN</span>
@@ -165,7 +144,7 @@
         </section>
 
         <!-- Values Section -->
-        <section class="values-section container">
+        <section class="values-section section container">
             <div class="values-grid">
                 <div class="value-card">
                     <div class="value-icon"><i data-lucide="history"></i></div>
@@ -194,78 +173,18 @@
             <div class="container">
                 <h2>GROUPBKCASH Banque</h2>
                 <h3 class="gradient-text">La banque en ligne de l'UE</h3>
-                <p style="margin-bottom: 2rem; color: var(--text-muted);">Bénéficiez des avantages d’une banque en ligne
-                    et d'une banque traditionnelle.</p>
+                <p class="final-cta-description">Bénéficiez des avantages d’une banque en ligne et d'une banque
+                    traditionnelle.</p>
                 <a href="register.html" class="btn btn-dark">Nous contacter</a>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                        <span class="logo-text">GROUPBK<span>CASH</span></span>
-                    </div>
-                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
-                        humaine préservée.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>L'OFFRE</h4>
-                    <ul>
-                        <li><a href="index.html">Particuliers</a></li>
-                        <li><a href="professions-liberales.html">Professionnels</a></li>
-                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                        <li><a href="register.html">Ouvrir un compte</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>PRATIQUE</h4>
-                    <ul>
-                        <li><a href="#">Tarifs</a></li>
-                        <li><a href="#">Aide & FAQ</a></li>
-                        <li><a href="#">Sécurité</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>GROUPBKCASH</h4>
-                    <ul>
-                        <li><a href="about.html">Qui sommes-nous ?</a></li>
-                        <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Presse</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-legal">
-                <p>(1) Offre valable pour toute première ouverture d'un compte individuel ou joint chez GROUPBKCASH.</p>
-                <p>(2) Sous réserve d'acceptation de votre dossier par GROUPBKCASH.</p>
-
-                <div class="footer-bottom">
-                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
-                    <div class="legal-links">
-                        <a href="#">MENTIONS LÉGALES</a>
-                        <a href="#">CONFIDENTIALITÉ</a>
-                        <a href="#">COOKIES</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer id="main-footer" class="footer">
+        <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Initialize Lucide icons

@@ -21,29 +21,8 @@
 </head>
 
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                <span class="logo-text">GROUPBK<span>CASH</span></span>
-            </a>
-
-            <ul class="nav-links">
-                <li><a href="index.html">Particuliers</a></li>
-                <li><a href="professions-liberales.html" class="active">Professionnels</a></li>
-                <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                <li><a href="about.html">Qui sommes-nous</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">Me connecter</a>
-                <a href="register.html" class="btn btn-primary">Ouvrir mon compte</a>
-            </div>
-
-            <button class="mobile-menu-toggle">
-                <i data-lucide="menu"></i>
-            </button>
-        </nav>
+    <header id="main-header" class="header">
+        <!-- Header will be injected by js/layout.js -->
     </header>
 
     <main>
@@ -61,14 +40,14 @@
                     Votre conseiller GROUPBKCASH Banque Espace est le business partner de la création, du développement
                     et de la transmission de votre entreprise.
                 </p>
-                <div class="hero-btns" style="margin-top: 3rem;">
+                <div class="hero-btns pro-hero-btns">
                     <a href="register.html" class="btn btn-primary">Je contacte un conseiller</a>
                 </div>
             </div>
         </header>
 
         <!-- Benefits Grid -->
-        <section class="benefits-section container" style="padding: 6rem 0;">
+        <section class="benefits-section section container">
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon icon-green"><i data-lucide="percent"></i></div>
@@ -92,17 +71,17 @@
                 </div>
             </div>
 
-            <div class="promo-banner" style="margin-top: 4rem;">
-                <div class="promo-content" style="padding: 3rem; text-align: center; grid-template-columns: 1fr;">
+            <div class="promo-banner-pro">
+                <div class="promo-content pro-promo">
                     <div class="promo-text">
-                        <h2 style="font-size: 2rem; margin-bottom: 1rem;">GROUPBKCASH BanqueAcces Prof Lib</h2>
-                        <h3 class="gradient-text" style="font-size: 3rem; margin-bottom: 1rem;">pour 10 €/mois(2)</h3>
+                        <h2 class="pro-promo-title">GROUPBKCASH BanqueAcces Prof Lib</h2>
+                        <h3 class="gradient-text pro-promo-price">pour 10 €/mois(2)</h3>
                         <a href="register.html" class="btn btn-primary">Je contacte un conseiller</a>
-                        <p style="font-size: 0.8rem; margin-top: 2rem; opacity: 0.6;">
-                            (1) Selon les modalités décrites dans les conditions générales GROUPBKCASH BanqueAccess Prof
-                            lib disponibles sur www.contact@group-bkcash.com.<br>
-                            (2) Consulter les tarifs en vigueur sur contact@group-bkcash.com.
-                        </p>
+                        <div class="pro-promo-footer">
+                            <p>(1) Selon les modalités décrites dans les conditions générales GROUPBKCASH BanqueAccess
+                                Prof lib disponibles sur www.contact@group-bkcash.com.</p>
+                            <p>(2) Consulter les tarifs en vigueur sur contact@group-bkcash.com.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,9 +92,8 @@
             <div class="features-grid">
                 <div class="features-text">
                     <h2 class="section-title">Une appli performante et un conseiller partenaire</h2>
-                    <p style="margin-bottom: 2rem; color: var(--text-muted);">Partout, tout le temps, votre conseiller
-                        GROUPBKCASH Banque Espace vous accompagne pour concrétiser tous vos projets professionnels et
-                        privés.</p>
+                    <p class="section-description">Partout, tout le temps, votre conseiller GROUPBKCASH Banque Espace
+                        vous accompagne pour concrétiser tous vos projets professionnels et privés.</p>
                     <div class="feature-items">
                         <div class="feature-item">
                             <div class="feature-icon icon-indigo"><i data-lucide="layout-dashboard"></i></div>
@@ -137,26 +115,24 @@
                 </div>
 
                 <div class="app-download-card">
-                    <div class="card-dark">
-                        <h3 style="text-align: center;">Téléchargez l'appli</h3>
-                        <div style="display: flex; justify-content: space-around; margin-bottom: 2rem;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 2rem; font-weight: 800; color: var(--primary);">4.6</div>
-                                <div style="font-size: 0.7rem; color: var(--text-muted);">App Store</div>
+                    <div class="card-dark app-card">
+                        <h3 class="app-card-title">Téléchargez l'appli</h3>
+                        <div class="app-stats-grid">
+                            <div class="app-stat">
+                                <div class="app-stat-value">4.6</div>
+                                <div class="app-stat-label">App Store</div>
                             </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 2rem; font-weight: 800; color: var(--primary);">4.5</div>
-                                <div style="font-size: 0.7rem; color: var(--text-muted);">Play Store</div>
+                            <div class="app-stat">
+                                <div class="app-stat-value">4.5</div>
+                                <div class="app-stat-label">Play Store</div>
                             </div>
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <a href="#" class="btn btn-outline"
-                                style="color: white; border-color: rgba(255,255,255,0.2);">
-                                <i data-lucide="apple" style="margin-right: 10px;"></i> App Store
+                        <div class="app-btns">
+                            <a href="#" class="btn btn-outline app-btn">
+                                <i data-lucide="apple"></i> App Store
                             </a>
-                            <a href="#" class="btn btn-outline"
-                                style="color: white; border-color: rgba(255,255,255,0.2);">
-                                <i data-lucide="play" style="margin-right: 10px;"></i> Google Play
+                            <a href="#" class="btn btn-outline app-btn">
+                                <i data-lucide="play"></i> Google Play
                             </a>
                         </div>
                     </div>
@@ -197,159 +173,86 @@
 
         <!-- Services PRO+ -->
         <section class="promo-banner container">
-            <div class="promo-content" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);">
+            <div class="promo-content pro-plus-banner">
                 <div class="promo-text">
-                    <div class="badge" style="background: rgba(255,255,255,0.1); color: white;">SERVICES PRO+</div>
-                    <h2 style="font-size: 2.2rem;">Gagnez du temps pour <br>développer votre activité</h2>
+                    <div class="badge pro-plus-badge">SERVICES PRO+</div>
+                    <h2 class="pro-plus-title">Gagnez du temps pour <br>développer votre activité</h2>
                     <p>Profitez de services sélectionnés et regroupés dans votre espace client GROUPBKCASH BanqueConnect
                         :</p>
-                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle"
-                                style="color: var(--primary); width: 18px;"></i> Agenda & RDV</li>
-                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle"
-                                style="color: var(--primary); width: 18px;"></i> Devis & factures</li>
-                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle"
-                                style="color: var(--primary); width: 18px;"></i> Notes de frais</li>
-                        <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle"
-                                style="color: var(--primary); width: 18px;"></i> Comptabilité</li>
+                    <ul class="pro-plus-features">
+                        <li><i data-lucide="check-circle"></i> Agenda & RDV</li>
+                        <li><i data-lucide="check-circle"></i> Devis & factures</li>
+                        <li><i data-lucide="check-circle"></i> Notes de frais</li>
+                        <li><i data-lucide="check-circle"></i> Comptabilité</li>
                     </ul>
                     <a href="register.html" class="btn btn-primary">Je découvre Services Pro+</a>
                 </div>
-                <div class="promo-features" style="display: flex; justify-content: center; align-items: center;">
-                    <div
-                        style="padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
-                        <i data-lucide="shield-check"
-                            style="width: 100px; height: 100px; color: var(--primary); opacity: 0.5;"></i>
+                <div class="promo-features-icon">
+                    <div class="icon-floating-wrapper">
+                        <i data-lucide="shield-check"></i>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Expert Section -->
-        <section class="expert-section container" style="padding: 8rem 0;">
-            <div class="about-grid">
-                <div class="about-text">
+        <section class="expert-section section container">
+            <div class="expert-grid">
+                <div class="expert-text">
                     <h2 class="section-title">À vos côtés pour tous vos projets</h2>
                     <p>Obtenez un diagnostic patrimonial gratuit avec un expert et demandez des conseils pour constituer
                         et valoriser votre patrimoine. Nous vous accompagnons selon votre profil : défiscalisation,
                         diversification et préparation à la retraite.</p>
                     <a href="register.html" class="btn btn-dark">J'en parle avec un conseiller</a>
                 </div>
-                <div class="advisor-card"
-                    style="background: var(--bg-light); padding: 3rem; border-radius: 24px; text-align: center; border: 1px solid var(--border);">
-                    <div class="advisor-image"
-                        style="width: 120px; height: 120px; background: var(--border); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-                        <i data-lucide="user" style="width: 60px; height: 60px; color: var(--text-muted);"></i>
+                <div class="advisor-card-modern">
+                    <div class="advisor-image-wrapper">
+                        <i data-lucide="user"></i>
                     </div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Anthony WENG</h3>
-                    <p style="color: var(--primary); font-weight: 600; margin-bottom: 1.5rem;">Conseiller GROUPBKCASH
-                        Banque Espace professions libérales</p>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem;">"Je vous apporte les
-                        solutions les plus adaptées à chaque étape du développement de votre activité. N’hésitez pas à
-                        me contacter pour me présenter votre projet."</p>
-                    <a href="register.html" class="btn btn-outline" style="width: 100%;">Contactez Anthony</a>
+                    <h3 class="advisor-name">Anthony WENG</h3>
+                    <p class="advisor-title">Conseiller GROUPBKCASH Banque Espace professions libérales</p>
+                    <p class="advisor-quote">"Je vous apporte les solutions les plus adaptées à chaque étape du
+                        développement de votre activité. N’hésitez pas à me contacter pour me présenter votre projet."
+                    </p>
+                    <a href="register.html" class="btn btn-outline full-width">Contactez Anthony</a>
                 </div>
             </div>
         </section>
 
         <!-- Global Strength Section -->
-        <section class="team-section" style="padding: 6rem 0;">
+        <section class="team-section section">
             <div class="container">
                 <h2 class="section-title-center">La banque en ligne de la GROUPBKCASH Banque Populaire</h2>
-                <div class="services-grid" style="margin-top: 4rem;">
-                    <div class="service-card"
-                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                <div class="services-grid team-services-grid">
+                    <div class="service-card dark-card">
                         <div class="service-icon icon-orange"><i data-lucide="history"></i></div>
-                        <h3 style="color: white;">Centenaire et coopérative</h3>
-                        <p style="color: rgba(255,255,255,0.7);">Banque historiquement créée par et pour les
-                            professionnels en 1919. 200 000 sociétaires détiennent 100 % du capital.</p>
+                        <h3>Centenaire et coopérative</h3>
+                        <p>Banque historiquement créée par et pour les professionnels en 1919. 200 000 sociétaires
+                            détiennent 100 % du capital.</p>
                     </div>
-                    <div class="service-card"
-                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    <div class="service-card dark-card">
                         <div class="service-icon icon-blue"><i data-lucide="globe"></i></div>
-                        <h3 style="color: white;">Régionale et internationale</h3>
-                        <p style="color: rgba(255,255,255,0.7);">300 agences en France et 75 implantations dans le
-                            monde. Une relation de proximité qui fait rayonner vos projets.</p>
+                        <h3>Régionale et internationale</h3>
+                        <p>300 agences en France et 75 implantations dans le monde. Une relation de proximité qui fait
+                            rayonner vos projets.</p>
                     </div>
-                    <div class="service-card"
-                        style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    <div class="service-card dark-card">
                         <div class="service-icon icon-green"><i data-lucide="bar-chart-3"></i></div>
-                        <h3 style="color: white;">Solide et dynamique</h3>
-                        <p style="color: rgba(255,255,255,0.7);">Plus d'un million de clients, un PNB de 1 636,8 M€ et
-                            un résultat net de 507,4 M€* pour financer votre développement.</p>
+                        <h3>Solide et dynamique</h3>
+                        <p>Plus d'un million de clients, un PNB de 1 636,8 M€ et un résultat net de 507,4 M€* pour
+                            financer votre développement.</p>
                     </div>
                 </div>
-                <p style="font-size: 0.8rem; margin-top: 3rem; text-align: center; opacity: 0.5; color: white;">* Source
-                    : Résultats GROUPBKCASH Banque 2022.</p>
+                <p class="source-hint-light">* Source : Résultats GROUPBKCASH Banque 2022.</p>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon"><i data-lucide="wallet"></i></span>
-                        <span class="logo-text">GROUPBK<span>CASH</span></span>
-                    </div>
-                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
-                        humaine préservée.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>L'OFFRE</h4>
-                    <ul>
-                        <li><a href="index.html">Particuliers</a></li>
-                        <li><a href="professions-liberales.html">Professionnels</a></li>
-                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                        <li><a href="register.html">Ouvrir un compte</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>PRATIQUE</h4>
-                    <ul>
-                        <li><a href="#">Tarifs</a></li>
-                        <li><a href="#">Aide & FAQ</a></li>
-                        <li><a href="#">Sécurité</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>GROUPBKCASH</h4>
-                    <ul>
-                        <li><a href="about.html">Qui sommes-nous ?</a></li>
-                        <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Presse</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-legal">
-                <p>(1) Offre valable pour toute première ouverture d'un compte individuel ou joint chez GROUPBKCASH.</p>
-                <p>(2) Sous réserve d'acceptation de votre dossier par GROUPBKCASH.</p>
-
-                <div class="footer-bottom">
-                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
-                    <div class="legal-links">
-                        <a href="#">MENTIONS LÉGALES</a>
-                        <a href="#">CONFIDENTIALITÉ</a>
-                        <a href="#">COOKIES</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer id="main-footer" class="footer">
+        <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Initialize Lucide icons
