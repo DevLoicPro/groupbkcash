@@ -10,13 +10,13 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
             --login-bg: #FFFFFF;
@@ -185,39 +185,6 @@
             font-weight: 700;
         }
 
-        .login-footer {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .encryption-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.6rem 1.2rem;
-            border: 1px solid #F3F4F6;
-            border-radius: 50px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-        }
-
-        .encryption-badge i {
-            color: #10B981;
-            width: 14px;
-            height: 14px;
-        }
-
-        .footer-copyright {
-            font-size: 0.65rem;
-            color: #D1D5DB;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
         @media (max-width: 768px) {
             .login-header {
                 padding: 1.5rem 2rem;
@@ -287,17 +254,69 @@
         </div>
     </main>
 
-    <footer class="login-footer">
-        <div class="encryption-badge">
-            <i data-lucide="check-circle"></i>
-            Cryptage bancaire 256-bit actif
-        </div>
-        <div class="footer-copyright">
-            © 2024 GROUPBKCASH BANQUE. PREMIUM SERVICE.
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon"><i data-lucide="wallet"></i></span>
+                        <span class="logo-text">GROUPBK<span>CASH</span></span>
+                    </div>
+                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
+                        humaine préservée.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>L'OFFRE</h4>
+                    <ul>
+                        <li><a href="index.html">Particuliers</a></li>
+                        <li><a href="professions-liberales.html">Professionnels</a></li>
+                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
+                        <li><a href="register.html">Ouvrir un compte</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>PRATIQUE</h4>
+                    <ul>
+                        <li><a href="#">Tarifs</a></li>
+                        <li><a href="#">Aide & FAQ</a></li>
+                        <li><a href="#">Sécurité</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>GROUPBKCASH</h4>
+                    <ul>
+                        <li><a href="about.html">Qui sommes-nous ?</a></li>
+                        <li><a href="#">Recrutement</a></li>
+                        <li><a href="#">Presse</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-legal">
+                <div class="footer-bottom">
+                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="#">MENTIONS LÉGALES</a>
+                        <a href="#">CONFIDENTIALITÉ</a>
+                        <a href="#">COOKIES</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
     <script>
         lucide.createIcons();
 

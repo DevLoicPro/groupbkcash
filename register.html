@@ -10,13 +10,13 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
             --form-bg: #FFFFFF;
@@ -277,37 +277,6 @@
             font-weight: 700;
         }
 
-        .final-footer {
-            margin-top: 6rem;
-            padding-bottom: 3rem;
-            border-top: 1px solid #F3F4F6;
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #9CA3AF;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        .footer-badges {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -331,10 +300,8 @@
                 display: none;
             }
 
-            .final-footer {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
+            .register-header {
+                padding: 1rem;
             }
         }
     </style>
@@ -514,21 +481,69 @@
         </div>
     </main>
 
-    <footer class="final-footer">
-        <div>© 2024 GROUPBKCASH. TOUS DROITS RÉSERVÉS.</div>
-        <div class="footer-badges">
-            <div class="footer-badge">
-                <i data-lucide="lock" style="width: 14px; height: 14px;"></i>
-                SECURE SSL
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon"><i data-lucide="wallet"></i></span>
+                        <span class="logo-text">GROUPBK<span>CASH</span></span>
+                    </div>
+                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
+                        humaine préservée.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>L'OFFRE</h4>
+                    <ul>
+                        <li><a href="index.html">Particuliers</a></li>
+                        <li><a href="professions-liberales.html">Professionnels</a></li>
+                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
+                        <li><a href="register.html">Ouvrir un compte</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>PRATIQUE</h4>
+                    <ul>
+                        <li><a href="#">Tarifs</a></li>
+                        <li><a href="#">Aide & FAQ</a></li>
+                        <li><a href="#">Sécurité</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>GROUPBKCASH</h4>
+                    <ul>
+                        <li><a href="about.html">Qui sommes-nous ?</a></li>
+                        <li><a href="#">Recrutement</a></li>
+                        <li><a href="#">Presse</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-badge">
-                <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
-                GDPR COMPLIANT
+
+            <div class="footer-legal">
+                <div class="footer-bottom">
+                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="#">MENTIONS LÉGALES</a>
+                        <a href="#">CONFIDENTIALITÉ</a>
+                        <a href="#">COOKIES</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
