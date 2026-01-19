@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification du Compte - GROUPBKCASH</title>
+    <meta name="description" content="Confirmez votre adresse e-mail pour activer votre compte GROUPBKCASH.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header id="main-header" class="header">
+        <!-- Header will be injected by js/layout.js -->
+    </header>
+
+    <main class="login-main">
+        <div class="login-card">
+            <div class="login-title-group">
+                <h1>Vérification</h1>
+                <p>Veuillez saisir le code de confirmation envoyé à votre adresse e-mail.</p>
+            </div>
+
+            <form id="verifyForm">
+                <div class="form-group">
+                    <label for="email">Adresse e-mail</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail" class="prefix-icon"></i>
+                        <input type="email" id="email" class="login-control" placeholder="votre@email.com" required
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="code">Code de confirmation</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="shield-check" class="prefix-icon"></i>
+                        <input type="text" id="code" class="login-control" placeholder="6 chiffres" maxlength="6"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn" id="verifyBtn">
+                    Activer mon compte
+                </button>
+            </form>
+
+            <div class="new-account">
+                Vous n'avez pas reçu le code ? <a href="#" id="resendCode">Renvoyer</a>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer" class="footer">
+        <!-- Footer will be injected by js/layout.js -->
+    </footer>
+
+    <script src="js/layout.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/verify.js"></script>
+</body>
+
+</html>

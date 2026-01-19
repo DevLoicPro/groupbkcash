@@ -16,6 +16,12 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -187,26 +193,8 @@
 
     <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Basic form handling
-        document.getElementById('registrationForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const originalContent = btn.innerHTML;
-
-            btn.disabled = true;
-            btn.innerHTML = 'Traitement en cours...';
-
-            setTimeout(() => {
-                alert('Félicitations ! Votre demande d\'ouverture de compte a été soumise avec succès.');
-                btn.disabled = false;
-                btn.innerHTML = originalContent;
-            }, 1500);
-        });
-    </script>
+    <script src="js/utils.js"></script>
+    <script src="js/register.js"></script>
 </body>
 
 </html>

@@ -182,10 +182,23 @@ function initMobileMenu() {
         document.body.appendChild(overlay);
     }
 
+    let scrollPosition = 0;
+
     const toggleMenu = () => {
         const isActive = navLinks.classList.toggle('active');
         overlay.classList.toggle('active');
-        document.body.style.overflow = isActive ? 'hidden' : '';
+
+        if (isActive) {
+            // Save current scroll position
+            scrollPosition = window.pageYOffset;
+            document.body.classList.add('scroll-lock');
+            document.body.style.top = `-${scrollPosition}px`;
+        } else {
+            // Restore scroll position
+            document.body.classList.remove('scroll-lock');
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition);
+        }
 
         const icon = mobileToggle.querySelector('i');
         if (isActive) {
@@ -198,8 +211,6 @@ function initMobileMenu() {
 
     // Remove existing listeners to avoid duplicates if re-init
     mobileToggle.removeEventListener('click', toggleMenu);
-    // Wait, removing anonymous function doesn't work. 
-    // But since this runs once per page load, it's fine.
 
     mobileToggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
@@ -207,12 +218,9 @@ function initMobileMenu() {
     // Close menu when clicking on a link
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-            const icon = mobileToggle.querySelector('i');
-            icon.setAttribute('data-lucide', 'menu');
-            lucide.createIcons();
+            if (navLinks.classList.contains('active')) {
+                toggleMenu(); // Use the same function to ensure scroll is restored
+            }
         });
     });
 }

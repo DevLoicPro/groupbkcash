@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Finalisée - GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .success-page-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .success-content {
+            max-width: 600px;
+            text-align: center;
+            background: white;
+            padding: 4rem;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .success-icon-big {
+            width: 80px;
+            height: 80px;
+            background: #E6FFF0;
+            color: #27AE60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+        }
+
+        .success-content h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .success-message-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .home-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // PROTECTION : Si l'utilisateur ne vient pas de la vérification, on le renvoie à l'accueil
+        if (!sessionStorage.getItem('fromVerify')) {
+            window.location.href = 'index.html';
+        } else {
+            // Une fois qu'il a vu la page, on efface le ticket pour qu'il ne puisse pas rafraîchir ou revenir
+            sessionStorage.removeItem('fromVerify');
+        }
+    </script>
+
+    <header id="main-header" class="header">
+        <!-- Header auto-injected -->
+    </header>
+
+    <main class="success-page-container">
+        <div class="success-content">
+            <div class="success-icon-big">
+                <i data-lucide="check-circle" style="width: 40px; height: 40px;"></i>
+            </div>
+            <h1>Félicitations !</h1>
+
+            <div class="message-box text-justify text-premium" style="margin-bottom: 3rem;">
+                <p style="margin-bottom: 1.5rem;">
+                    <strong>Chers clients,</strong><br>
+                    Nous sommes ravis de vous compter désormais parmi les membres privilégiés de
+                    <strong>GROUPBKCASH</strong>.
+                </p>
+                <p style="margin-bottom: 1.5rem;">
+                    Votre adhésion en ligne a été finalisée avec succès. Votre dossier est actuellement en cours de
+                    <strong>traitement prioritaire</strong> auprès de nos agents de validation.
+                </p>
+                <p>
+                    Sous peu, vous recevrez vos identifiants de connexion officiels ainsi que vos accès sécurisés par
+                    <strong>e-mail</strong> et par <strong>SMS</strong>. Nous vous remercions pour la confiance que vous
+                    témoignez à notre institution.
+                </p>
+            </div>
+
+            <a href="index.html" class="home-btn">RETOUR À L'ACCUEIL</a>
+        </div>
+    </main>
+
+    <footer id="main-footer" class="footer">
+        <!-- Footer auto-injected -->
+    </footer>
+
+    <script src="js/layout.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
