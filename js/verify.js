@@ -13,30 +13,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const verifyForm = document.getElementById('verifyForm');
     const verifyBtn = document.getElementById('verifyBtn');
-    const emailInput = document.getElementById('email');
     const codeInput = document.getElementById('code');
 
+    // Récupération de l'email directement depuis l'URL
     const urlParams = new URLSearchParams(window.location.search);
-    const emailParam = urlParams.get('email');
-    if (emailParam) {
-        emailInput.value = decodeURIComponent(emailParam);
-    }
+    const email = urlParams.get('email') ? decodeURIComponent(urlParams.get('email')).trim() : "";
 
     if (verifyForm) {
         verifyForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const email = emailInput.value.trim();
             const code = codeInput.value.trim();
 
             if (!email || !code) {
-                UI.showModal("Champs manquants", "Veuillez remplir tous les champs du formulaire.", "info");
+                UI.showModal("Champs manquants", "Le lien est invalide ou le code est manquant.", "info");
                 return;
             }
 
             const originalBtnContent = verifyBtn.innerHTML;
             verifyBtn.disabled = true;
-            verifyBtn.innerHTML = '<span class="loader"></span> Activation...';
+            verifyBtn.innerHTML = '<span class="loader"></span> Confirmation...';
 
             try {
                 const { data, error } = await _supabase
