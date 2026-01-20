@@ -68,8 +68,10 @@
         <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
     <script>
         lucide.createIcons();
 
@@ -77,26 +79,14 @@
         const togglePassword = document.querySelector('#togglePassword');
         const passwordInput = document.querySelector('#password');
 
-        togglePassword.addEventListener('click', function () {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.setAttribute('data-lucide', type === 'password' ? 'eye' : 'eye-off');
-            lucide.createIcons();
-        });
-
-        // Form handling
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const btn = document.getElementById('loginBtn');
-            btn.innerHTML = 'Connexion...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                alert('Erreur de connexion : Identifiant ou mot de passe incorrect.');
-                btn.innerHTML = 'Se connecter';
-                btn.disabled = false;
-            }, 1000);
-        });
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.setAttribute('data-lucide', type === 'password' ? 'eye' : 'eye-off');
+                lucide.createIcons();
+            });
+        }
     </script>
 </body>
 

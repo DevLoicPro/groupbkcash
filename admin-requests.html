@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demandes d'adhésion - Admin GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i data-lucide="shield-check" style="color: var(--primary);"></i>
+                <span>GROUPBK<span>CASH</span></span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="admin-dashboard.html" class="menu-link">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Vue d'ensemble</span>
+            </a>
+            <a href="admin-requests.html" class="menu-link active">
+                <i data-lucide="clipboard-list"></i>
+                <span>Demandes d'adhésion</span>
+            </a>
+            <a href="admin-users.html" class="menu-link">
+                <i data-lucide="users"></i>
+                <span>Gestion Utilisateurs</span>
+            </a>
+            <a href="index.html" class="menu-link">
+                <i data-lucide="external-link"></i>
+                <span>Voir le site client</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="logout-link">
+                <i data-lucide="log-out"></i>
+                <span>DÉCONNEXION</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <header class="header-admin">
+            <div class="page-title">
+                <h1>Demandes d'adhésion</h1>
+                <p>Examinez et approuvez les nouveaux dossiers clients.</p>
+            </div>
+        </header>
+
+        <div class="data-card">
+            <div class="table-responsive">
+                <table id="requestsTable">
+                    <thead>
+                        <tr>
+                            <th>Date de soumission</th>
+                            <th>Candidat</th>
+                            <th>Détails Financiers</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                Chargement...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Review Modal -->
+    <div class="admin-modal-overlay" id="reviewModal">
+        <div class="admin-modal">
+            <div class="modal-header">
+                <h2 id="modalUserName">Nom du client</h2>
+                <p style="color: var(--text-muted);">Examen approfondi du dossier d'inscription</p>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modalRequestId" value="">
+                
+                <div class="info-item">
+                    <span>Email</span>
+                    <span id="modalEmail">email@example.com</span>
+                </div>
+                <div class="info-item">
+                    <span>Téléphone</span>
+                    <span id="modalPhone">N/A</span>
+                </div>
+                <div class="info-item">
+                    <span>Adresse</span>
+                    <span id="modalAddress">N/A</span>
+                </div>
+                <div class="info-item">
+                    <span>Nationalité</span>
+                    <span id="modalNationality">N/A</span>
+                </div>
+                <div class="info-item">
+                    <span>Statut marital</span>
+                    <span id="modalMaritalStatus">N/A</span>
+                </div>
+                <div class="info-item">
+                    <span>Profession</span>
+                    <span id="modalProfession">N/A</span>
+                </div>
+                <div class="info-item">
+                    <span>Revenu mensuel</span>
+                    <span id="modalIncome">0 €</span>
+                </div>
+                <div class="info-item">
+                    <span>Vérification Documents</span>
+                    <span style="color: #22C55E;"><i data-lucide="check-circle-2" size="14"></i> PIÈCES VALIDES</span>
+                </div>
+
+                <!-- Section Approbation -->
+                <div id="approvalSection" style="margin-top: 2.5rem; display: none;">
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--dark);">Identifiants de connexion
+                        générés</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        Veuillez communiquer ces identifiants au client par voie sécurisée.
+                        Le compte passera en statut <strong>INACTIF</strong> jusqu'à l'activation finale par
+                        l'administrateur.
+                    </p>
+                    <div class="credential-box">
+                        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem;">IDENTIFIANT CLIENT</div>
+                        <div class="credential-id" id="generatedClientId">BK-000-000</div>
+                        <div style="margin-top: 1rem; font-size: 0.7rem; color: var(--text-muted);">MOT DE PASSE TEMPORAIRE</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-top: 0.5rem; font-family: monospace;" id="generatedPassword">••••••••</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <button class="btn-action" onclick="closeModal()">Fermer</button>
+                <button class="btn-action btn-primary-admin" id="approveBtn" onclick="approveRequest()">
+                    <i data-lucide="check" size="14"></i> Approuver et Générer Identifiants
+                </button>
+                <button class="btn-action btn-primary-admin" id="sendCredentialsBtn" onclick="sendCredentials()" style="display: none;">
+                    <i data-lucide="send" size="14"></i> Renvoyer les Identifiants
+                </button>
+                <button class="btn-action" style="color: #EF4444; border-color: #EF4444;"
+                    id="rejectBtn">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script src="js/admin.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Utilisateurs - Admin GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i data-lucide="shield-check" style="color: var(--primary);"></i>
+                <span>GROUPBK<span>CASH</span></span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="admin-dashboard.html" class="menu-link">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Vue d'ensemble</span>
+            </a>
+            <a href="admin-requests.html" class="menu-link">
+                <i data-lucide="clipboard-list"></i>
+                <span>Demandes d'adhésion</span>
+            </a>
+            <a href="admin-users.html" class="menu-link active">
+                <i data-lucide="users"></i>
+                <span>Gestion Utilisateurs</span>
+            </a>
+            <a href="index.html" class="menu-link">
+                <i data-lucide="external-link"></i>
+                <span>Voir le site client</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="logout-link">
+                <i data-lucide="log-out"></i>
+                <span>DÉCONNEXION</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <header class="header-admin">
+            <div class="page-title">
+                <h1>Gestion des Utilisateurs</h1>
+                <p>Gérez les comptes clients, activez les nouveaux membres et surveillez la sécurité.</p>
+            </div>
+        </header>
+
+        <!-- Search and Filters -->
+        <div
+            style="background: var(--white); padding: 1.5rem; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 2rem; display: flex; gap: 1rem;">
+            <div style="flex: 1; position: relative;">
+                <input type="text" placeholder="Rechercher par nom, email ou ID..."
+                    style="width: 100%; padding: 1rem 1.2rem; border-radius: 12px; border: 1px solid var(--border); font-size: 0.9rem; outline: none;">
+            </div>
+            <select
+                style="padding: 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--white); font-size: 0.9rem; min-width: 180px; outline: none;">
+                <option value="all">Tous les statuts</option>
+                <option value="inactif">Inactifs (en attente activation)</option>
+                <option value="actif">Actifs</option>
+                <option value="suspendu">Suspendus</option>
+            </select>
+            <button class="btn-action btn-primary-admin" style="padding: 0 2rem;">Filtrer</button>
+        </div>
+
+        <div class="data-card">
+            <div class="table-responsive">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>ID Client</th>
+                            <th>Utilisateur</th>
+                            <th>Statut</th>
+                            <th>Dernière connexion</th>
+                            <th>Actions d'administration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                Chargement...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Activation Modal avec Attribution de Carte -->
+    <div class="admin-modal-overlay" id="activationModal">
+        <div class="admin-modal" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2>Activation du Compte & Attribution de Carte</h2>
+                <p style="color: var(--text-muted);">Activez le compte et attribuez les informations de la carte bancaire</p>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="activationUserId" value="">
+                
+                <div class="info-item">
+                    <span>Nom complet</span>
+                    <span id="activationUserName">Nom du client</span>
+                </div>
+                <div class="info-item">
+                    <span>Email</span>
+                    <span id="activationUserEmail">email@example.com</span>
+                </div>
+                <div class="info-item">
+                    <span>ID Client</span>
+                    <span id="activationClientId" style="font-family: monospace; font-weight: 700;">BK-000-000</span>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--border);">
+                    <h3 style="font-size: 1rem; margin-bottom: 1.5rem; color: var(--dark);">
+                        <i data-lucide="credit-card" size="18" style="vertical-align: middle;"></i> Informations de la Carte Bancaire
+                    </h3>
+                    
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+                                Numéro de carte (16 chiffres)
+                            </label>
+                            <input 
+                                type="text" 
+                                id="cardNumber" 
+                                placeholder="1234 5678 9012 3456"
+                                maxlength="19"
+                                style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); font-size: 1rem; font-family: monospace; letter-spacing: 2px; outline: none;"
+                                oninput="this.value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19)"
+                            >
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+                                    Date d'expiration (MM/YY)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="cardExpiry" 
+                                    placeholder="12/26"
+                                    maxlength="5"
+                                    style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); font-size: 1rem; font-family: monospace; outline: none;"
+                                    oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 5)"
+                                >
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+                                    CVV (3 chiffres)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="cardCVV" 
+                                    placeholder="123"
+                                    maxlength="3"
+                                    style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); font-size: 1rem; font-family: monospace; outline: none;"
+                                    oninput="this.value = this.value.replace(/\D/g, '').slice(0, 3)"
+                                >
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255,102,0,0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,102,0,0.2);">
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                                <i data-lucide="info" size="14" style="vertical-align: middle;"></i>
+                                Les informations de la carte sont générées automatiquement. Vous pouvez les modifier manuellement si nécessaire.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <button class="btn-action" onclick="closeActivationModal()">Annuler</button>
+                <button class="btn-action btn-primary-admin" onclick="activateAccountAndAssignCard()">
+                    <i data-lucide="check" size="14"></i> Activer le Compte & Attribuer la Carte
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/admin.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
