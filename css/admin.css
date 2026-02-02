@@ -1,21 +1,17 @@
-/* CSS Admin - GROUPBKCASH 
-   Aligné sur l'identité visuelle du site (style.css) 
-*/
-
 :root {
-    --primary: #FF6600;
-    --primary-hover: #E65C00;
-    --dark: #0A0A0A;
-    --dark-accent: #151515;
-    --text: #1A1A1A;
-    --text-muted: #666666;
+    --primary: #0052FF;
+    --primary-hover: #0041CC;
+    --dark: #0F172A;
+    --dark-accent: #1E293B;
+    --text: #1E293B;
+    --text-muted: #64748B;
     --white: #FFFFFF;
-    --bg-light: #F9F9F9;
-    --border: #E5E5E5;
+    --bg-light: #F8FAFC;
+    --border: #E2E8F0;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     /* Statuts */
-    --status-pending: #FF6600;
+    --status-pending: #0052FF;
     --status-inactive: #94A3B8;
     --status-active: #22C55E;
     --status-suspended: #EF4444;

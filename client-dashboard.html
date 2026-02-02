@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Client - GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <link rel="stylesheet" href="css/client-dashboard.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="logo-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <span class="logo-text">GROUPBK<span>CASH</span></span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="menu-label" data-i18n="menu_label_main">MENU PRINCIPAL</div>
+            <a href="#" class="menu-link active" data-tab="dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span data-i18n="menu_dashboard">Dashboard</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="transactions">
+                <i data-lucide="receipt"></i>
+                <span data-i18n="menu_transactions">Transactions</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="cards">
+                <i data-lucide="credit-card"></i>
+                <span data-i18n="menu_cards">Mes Cartes</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="transfers">
+                <i data-lucide="send"></i>
+                <span data-i18n="menu_transfers">Virements</span>
+            </a>
+
+            <div class="menu-label" style="margin-top: 2rem;" data-i18n="menu_label_prefs">PRÉFÉRENCES</div>
+            <a href="#" class="menu-link" data-tab="profile">
+                <i data-lucide="user"></i>
+                <span data-i18n="menu_profile">Profil</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="settings">
+                <i data-lucide="settings"></i>
+                <span data-i18n="menu_settings">Paramètres</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="login.html" class="logout-link">
+                <i data-lucide="log-out"></i>
+                <span data-i18n="menu_logout">Déconnexion</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Section -->
+        <div class="dashboard-header">
+            <div class="greeting">
+                <h1 data-i18n="dash_welcome">Bonjour</h1> 👋
+            </div>
+            <div class="status-badges">
+                <span class="badge badge-valid" data-i18n="dash_status_valid">COMPTE VALIDE</span>
+                <span class="badge badge-new" data-i18n="dash_status_new">NOUVEAU MEMBRE</span>
+            </div>
+        </div>
+
+        <!-- Card Section -->
+        <div class="card-section">
+            <div class="bank-card-visual">
+                <div class="card-chip">
+                    <i data-lucide="cpu"></i>
+                </div>
+                <div class="card-logo-right">
+                    <div class="card-logo-circle">MA</div>
+                </div>
+                <div class="card-number">
+                    <span class="card-number-part">0000</span>
+                    <span class="card-number-inactive" data-i18n="dash_card_inactive_text">CARTE INACTIVE</span>
+                    <span class="card-number-part">0000</span>
+                </div>
+                <div class="card-holder">
+                    <div class="card-holder-label" data-i18n="dash_holder_label">NOM PRÉNOM</div>
+                    <div class="card-expiry" data-i18n="dash_expiry_label">EXP 06/88</div>
+                </div>
+            </div>
+            <div class="card-info">
+                <p class="card-status-message" data-i18n="dash_card_inactive_msg">Votre carte bancaire n'est pas encore
+                    active.</p>
+                <button class="btn-order-card" id="requestCardBtn">
+                    <i data-lucide="credit-card"></i>
+                    <span data-i18n="card_request">COMMANDER LA CARTE</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Balances Section -->
+        <div class="balances-section">
+            <div class="balance-card">
+                <div class="balance-label" data-i18n="dash_balance_main">SOLDE PRINCIPAL</div>
+                <div class="balance-amount" id="mainBalance">€0,00</div>
+            </div>
+            <div class="balance-card">
+                <div class="balance-label" data-i18n="dash_balance_saved">TOTAL ÉCONOMISÉ</div>
+                <div class="balance-amount" id="totalSaved">€0,00</div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="transactions-section">
+            <h2 class="section-title" data-i18n="dash_recent_ops">Transactions récentes</h2>
+            <div class="transactions-card">
+                <div class="empty-transactions">
+                    <i data-lucide="refresh-cw"></i>
+                    <p data-i18n="dash_no_transactions">Aucune transaction pour le moment</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Card Request Modal -->
+    <div class="modal-overlay" id="cardRequestModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 data-i18n="dash_modal_card_title">Demander l'activation de la carte</h2>
+                <button class="modal-close" onclick="closeCardModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-fee-info">
+                    <p><strong data-i18n="dash_modal_card_fee">Frais d'activation : 466 €</strong></p>
+                    <p data-i18n="dash_modal_card_info">En activant votre carte, vous acceptez les conditions générales
+                        d'utilisation.</p>
+                </div>
+                <button class="btn-primary" onclick="requestCardActivation()" data-i18n="dash_modal_confirm">
+                    Confirmer la demande
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/client-dashboard.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

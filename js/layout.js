@@ -5,7 +5,11 @@
 
 const COMPONENTS = {
     // Header for Main Pages (Index, About, Cards, Professionals)
-    header: (activePage = '') => `
+    header: (activePage = '') => {
+        const lang = localStorage.getItem('groupbk_lang') || 'fr';
+        const t = TRANSLATIONS[lang];
+
+        return `
         <nav class="nav container">
             <a href="index.html" class="logo">
                 <span class="logo-icon"><i data-lucide="wallet"></i></span>
@@ -15,35 +19,47 @@ const COMPONENTS = {
             <ul class="nav-links">
                 <li class="nav-item dropdown">
                     <button class="nav-link dropdown-toggle" id="offres-toggle">
-                        Nos offres <i data-lucide="chevron-down" class="chevron-icon"></i>
+                        <span data-i18n="nav_offers">${t.nav_offers}</span> <i data-lucide="chevron-down" class="chevron-icon"></i>
                     </button>
                     <ul class="dropdown-menu" id="offres-menu">
-                        <li><a href="index.html" class="${activePage === 'index.html' ? 'active' : ''}">Particulier</a></li>
-                        <li><a href="professions-liberales.html" class="${activePage === 'professions-liberales.html' ? 'active' : ''}">Professionnel</a></li>
+                        <li><a href="index.html" class="${activePage === 'index.html' ? 'active' : ''}" data-i18n="nav_individuals">${t.nav_individuals}</a></li>
+                        <li><a href="professions-liberales.html" class="${activePage === 'professions-liberales.html' ? 'active' : ''}" data-i18n="nav_pros">${t.nav_pros}</a></li>
                     </ul>
                 </li>
-                <li><a href="nos-cartes.html" class="${activePage === 'nos-cartes.html' ? 'active' : ''}">Nos Cartes</a></li>
-                <li><a href="about.html" class="${activePage === 'about.html' ? 'active' : ''}">Qui sommes-nous</a></li>
-                <li><a href="contact.html" class="${activePage === 'contact.html' ? 'active' : ''}">Contact</a></li>
+                <li><a href="nos-cartes.html" class="${activePage === 'nos-cartes.html' ? 'active' : ''}" data-i18n="nav_cards">${t.nav_cards}</a></li>
+                <li><a href="about.html" class="${activePage === 'about.html' ? 'active' : ''}" data-i18n="nav_about">${t.nav_about}</a></li>
+                <li><a href="contact.html" class="${activePage === 'contact.html' ? 'active' : ''}" data-i18n="nav_contact">${t.nav_contact}</a></li>
                 <li class="mobile-only-actions">
-                    <a href="login.html" class="btn btn-outline mobile-btn">Se connecter</a>
-                    <a href="register.html" class="btn btn-primary mobile-btn">Ouvrir un compte bancaire</a>
+                    <div class="mobile-switcher">
+                        ${i18n.getSwitcherHTML()}
+                    </div>
+                    <div class="mobile-btns-wrapper">
+                        <a href="login.html" class="btn btn-outline mobile-btn" data-i18n="nav_login">${t.nav_login}</a>
+                        <a href="register.html" class="btn btn-primary mobile-btn" data-i18n="nav_register">${t.nav_register}</a>
+                    </div>
                 </li>
             </ul>
 
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">Me connecter</a>
-                <a href="register.html" class="btn btn-primary">Ouvrir un compte</a>
+                ${i18n.getSwitcherHTML()}
+                <a href="login.html" class="btn btn-outline" data-i18n="nav_login">${t.nav_login}</a>
+                <a href="register.html" class="btn btn-primary" data-i18n="nav_register">${t.nav_register}</a>
             </div>
 
             <button class="mobile-menu-toggle">
                 <i data-lucide="menu"></i>
             </button>
         </nav>
-    `,
+        `;
+    },
 
     // Standard Footer for ALL pages
-    footer: `
+    footer: () => {
+        const lang = localStorage.getItem('groupbk_lang') || 'fr';
+        const t = TRANSLATIONS[lang];
+        const currentYear = new Date().getFullYear();
+
+        return `
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
@@ -51,8 +67,7 @@ const COMPONENTS = {
                         <span class="logo-icon"><i data-lucide="wallet"></i></span>
                         <span class="logo-text">GROUPBK<span>CASH</span></span>
                     </div>
-                    <p>La banque qui réinvente votre quotidien avec des outils technologiques de pointe et une dimension
-                        humaine préservée.</p>
+                    <p data-i18n="footer_desc">${t.footer_desc}</p>
                     <div class="social-links">
                         <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
                         <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
@@ -62,48 +77,49 @@ const COMPONENTS = {
                 </div>
 
                 <div class="footer-column">
-                    <h4>L'OFFRE</h4>
+                    <h4 data-i18n="footer_offers">${t.footer_offers}</h4>
                     <ul>
-                        <li><a href="index.html">Particuliers</a></li>
-                        <li><a href="professions-liberales.html">Professionnels</a></li>
-                        <li><a href="nos-cartes.html">Nos Cartes</a></li>
-                        <li><a href="register.html">Ouvrir un compte</a></li>
+                        <li><a href="index.html" data-i18n="nav_individuals">${t.nav_individuals}</a></li>
+                        <li><a href="professions-liberales.html" data-i18n="nav_pros">${t.nav_pros}</a></li>
+                        <li><a href="nos-cartes.html" data-i18n="nav_cards">${t.nav_cards}</a></li>
+                        <li><a href="register.html" data-i18n="nav_register">${t.nav_register}</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h4>PRATIQUE</h4>
+                    <h4 data-i18n="footer_practical">${t.footer_practical}</h4>
                     <ul>
-                        <li><a href="#">Tarifs</a></li>
-                        <li><a href="#">Aide & FAQ</a></li>
-                        <li><a href="#">Sécurité</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#" data-i18n="footer_rates">${t.footer_rates}</a></li>
+                        <li><a href="#" data-i18n="footer_faq">${t.footer_faq}</a></li>
+                        <li><a href="#" data-i18n="footer_security">${t.footer_security}</a></li>
+                        <li><a href="contact.html" data-i18n="nav_contact">${t.nav_contact}</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h4>GROUPBKCASH</h4>
+                    <h4 data-i18n="footer_group">${t.footer_group}</h4>
                     <ul>
-                        <li><a href="about.html">Qui sommes-nous ?</a></li>
-                        <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Presse</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="about.html" data-i18n="nav_about">${t.nav_about}</a></li>
+                        <li><a href="#" data-i18n="footer_jobs">${t.footer_jobs}</a></li>
+                        <li><a href="#" data-i18n="footer_press">${t.footer_press}</a></li>
+                        <li><a href="#" data-i18n="footer_blog">${t.footer_blog}</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-legal">
                 <div class="footer-bottom">
-                    <p>© 2024 GROUPBKCASH Banque. Tous droits réservés.</p>
+                    <p>© ${currentYear} Groupe BK Cash Bank — <span data-i18n="footer_rights">${t.footer_rights}</span></p>
                     <div class="legal-links">
-                        <a href="#">MENTIONS LÉGALES</a>
-                        <a href="#">CONFIDENTIALITÉ</a>
-                        <a href="#">COOKIES</a>
+                        <a href="legal.html" data-i18n="footer_legal">${t.footer_legal}</a>
+                        <a href="security.html" data-i18n="footer_privacy">CONFIDENTIALITÉ ET SÉCURITÉ</a>
+                        <a href="cookies.html" data-i18n="footer_cookies">${t.footer_cookies}</a>
                     </div>
                 </div>
             </div>
         </div>
-    `
+        `;
+    }
 };
 
 /**
@@ -124,19 +140,24 @@ function initLayout() {
 
     // Inject Footer (only if container exists)
     if (footerContainer) {
-        footerContainer.innerHTML = COMPONENTS.footer;
+        footerContainer.innerHTML = COMPONENTS.footer();
     }
 
-    // Re-initialize icons/scripts that depend on DOM
-    if (window.lucide) {
-        lucide.createIcons();
-    }
-
-    // Initialize Mobile Menu Logic (moved from main.js)
+    // Initialize interactive elements
+    lucide.createIcons();
     initMobileMenu();
-
-    // Initialize Dropdown Logic
     initDropdowns();
+
+    // Re-render components when language changes
+    document.addEventListener('languageChanged', () => {
+        if (headerContainer) headerContainer.innerHTML = COMPONENTS.header(page);
+        if (footerContainer) {
+            footerContainer.innerHTML = COMPONENTS.footer();
+        }
+        lucide.createIcons();
+        initMobileMenu();
+        initDropdowns();
+    });
 }
 
 /**

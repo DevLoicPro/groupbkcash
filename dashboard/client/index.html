@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Client - GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="../../css/dashboard.css">
+
+    <!-- Scripts fondamentaux chargés en premier -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/i18n.js"></script>
+    <script src="../../js/supabase-config.js"></script>
+    <script src="../../js/ui-utils.js"></script>
+    <script src="../../js/layout.js"></script>
+
+    <style>
+        /* Protection contre accès non autorisé */
+        body {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i data-lucide="shield-check" style="color: var(--primary);"></i>
+                <span>GROUPBK<span>CASH</span></span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="menu-label" data-i18n="menu_label_main">Menu Principal</div>
+            <a href="#" class="menu-link active" data-tab="overview">
+                <i data-lucide="layout-dashboard"></i>
+                <span data-i18n="menu_dashboard">Tableau de Bord</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="virements">
+                <i data-lucide="arrow-right-circle"></i>
+                <span data-i18n="menu_transfers">Virements</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="profil">
+                <i data-lucide="user"></i>
+                <span data-i18n="menu_profile">Mon Profil</span>
+            </a>
+
+            <div class="menu-label" data-i18n="menu_label_services">Services</div>
+            <a href="#" class="menu-link" data-tab="support">
+                <i data-lucide="message-square"></i>
+                <span data-i18n="menu_support">Support Client</span>
+            </a>
+            <a href="#" class="menu-link" data-tab="notifications">
+                <i data-lucide="bell"></i>
+                <span data-i18n="menu_notifications">Notifications</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div id="dash-lang-switcher" style="padding: 0 1.25rem; margin-bottom: 1rem;">
+                <!-- Initial content will be injected by i18n/dashboard script -->
+            </div>
+            <a href="#" class="logout-link" id="logoutBtn">
+                <i data-lucide="log-out"></i>
+                <span data-i18n="menu_logout">Se déconnecter</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="mobile-nav-link active" data-tab="overview">
+            <i data-lucide="layout-dashboard"></i>
+            <span data-i18n="menu_dashboard">Dashboard</span>
+        </a>
+        <a href="#" class="mobile-nav-link" data-tab="virements">
+            <i data-lucide="arrow-right-circle"></i>
+            <span data-i18n="menu_transfers">Virements</span>
+        </a>
+        <a href="#" class="mobile-nav-link" data-tab="profil">
+            <i data-lucide="user"></i>
+            <span data-i18n="menu_profile">Profil</span>
+        </a>
+        <a href="#" class="mobile-nav-link" data-tab="support">
+            <i data-lucide="message-square"></i>
+            <span data-i18n="menu_support">Support</span>
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+
+        <!-- TAB: OVERVIEW -->
+        <div id="tab-overview" class="tab-content active">
+            <header class="header-hero" style="margin-bottom: 2rem;">
+                <div
+                    style="font-size: 0.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase;">
+                    GROUPBKCASH</div>
+                <h1 class="greeting"><span data-i18n="dash_welcome">Bonjour</span> <span
+                        id="clientFirstName">Prénom</span> 👋</h1>
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; opacity: 0.7;">
+                    <span data-i18n="dash_active_session">Session active:</span> <span id="sessionTimer"
+                        style="font-weight: 700; font-family: monospace;">10:00</span>
+                </div>
+            </header>
+
+            <div style="max-width: 600px; margin: 0 auto 4rem; text-align: center;">
+                <div class="pills-container" style="margin-bottom: 2rem;">
+                    <span class="pill pill-green" id="headerStatus" data-i18n="dash_status_active">Compte Actif</span>
+                    <span class="pill pill-orange" data-i18n="dash_status_elite">Privilège Elite</span>
+                </div>
+
+                <div class="card-preview" style="margin-bottom: 1.5rem; position: relative;">
+                    <div id="cardInactiveOverlay" class="card-overlay" style="display: none;">
+                        <div style="background: rgba(0,0,0,0.85); padding: 1rem 2rem; border-radius: 12px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: white; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);"
+                            data-i18n="card_inactive">
+                            CARTE BANCAIRE INACTIVE
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div class="card-chip"></div>
+                        <i data-lucide="wifi" style="opacity: 0.5; width: 20px; height: 20px;"></i>
+                    </div>
+
+                    <div class="card-number" id="dispCardNum">
+                        •••• •••• •••• 1234
+                    </div>
+
+                    <div class="card-holder-info">
+                        <div style="flex: 1;">
+                            <div class="card-value" id="dispCardName">PRÉNOM NOM</div>
+                        </div>
+
+                        <div
+                            style="display: flex; gap: 1.2rem; margin-right: 1.5rem; align-items: flex-end; flex-direction: column;">
+                            <div style="font-size: 0.7rem; opacity: 0.8; font-weight: 700;" id="dispCardType">Visa
+                                Infinite</div>
+                            <div style="display: flex; gap: 1rem;">
+                                <div class="card-value" id="dispCardExp">09/27</div>
+                                <div class="card-value" id="dispCardCvv">***</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p id="cardStatusMessage" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;"
+                    data-i18n="dash_card_inactive_msg">
+                    Votre carte bancaire n'est pas encore active.
+                </p>
+
+                <button class="btn-premium" onclick="openCardRequestModal()" id="cardActionBtn"
+                    style="display: inline-flex; background: var(--dark); color: white;" data-i18n="card_request">
+                    <i data-lucide="credit-card" style="width: 18px; height: 18px;"></i>
+                    DEMANDER UNE CARTE
+                </button>
+            </div>
+
+            <div class="balance-grid"
+                style="margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div class="balance-box">
+                    <span class="balance-label" data-i18n="dash_balance_main">Solde Principal</span>
+                    <p class="balance-amount" id="balancePrimary">€0,00</p>
+                </div>
+                <div class="balance-box">
+                    <span class="balance-label" data-i18n="dash_balance_saved">Total Économisé</span>
+                    <p class="balance-amount" id="balanceAvailable">€0,00</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title" data-i18n="dash_recent_ops">Opérations Récentes</h2>
+                <div id="transactionsList" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    <i data-lucide="loader-2" class="animate-spin" style="margin-bottom: 1rem;"></i>
+                    <p data-i18n="dash_loading_ops">Chargement de vos opérations...</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="section-title" data-i18n="dash_info_title">Informations de Compte (Lecture Seule)</h2>
+                <div class="details-grid">
+                    <div>
+                        <span class="form-label" data-i18n="dash_info_name">Nom & Prénom</span>
+                        <div style="font-weight: 700; color: var(--dark);" id="infoName">...</div>
+                    </div>
+                    <div>
+                        <span class="form-label" data-i18n="dash_account_status">Statut du Compte</span>
+                        <div style="font-weight: 700; color: var(--status-active);" id="infoStatus">...</div>
+                    </div>
+                    <div>
+                        <span class="form-label" data-i18n="dash_id_client">Identifiant Client (ID)</span>
+                        <div style="font-weight: 700; font-family: monospace;" id="infoClientId">...</div>
+                    </div>
+                    <div>
+                        <span class="form-label" data-i18n="dash_acc_num">Numéro de Compte</span>
+                        <div style="font-weight: 700; font-family: monospace;" id="infoAccNum">...</div>
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <span class="form-label" data-i18n="dash_iban">IBAN</span>
+                        <div style="font-weight: 700; font-family: monospace;" id="infoIban">...</div>
+                    </div>
+                    <div>
+                        <span class="form-label" data-i18n="dash_swift">Code SWIFT (BIC)</span>
+                        <div style="font-weight: 700; font-family: monospace;" id="infoSwift">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: VIREMENTS -->
+        <div id="tab-virements" class="tab-content">
+            <header class="header-hero">
+                <h1 class="greeting" data-i18n="dash_trans_title">Virements & Transferts</h1>
+                <p style="color: var(--text-muted);" data-i18n="dash_trans_subtitle">Service SEPA EXPRESS & STANDARD
+                    sécurisé.</p>
+            </header>
+
+            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
+                <form id="transferForm">
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_trans_method">Méthode de Virement</label>
+                        <select class="form-input" id="transMethod" onchange="toggleTransferUI()">
+                            <option value="bank" data-i18n="dash_trans_method_bank">Virement Bancaire (Compte à Compte)
+                            </option>
+                            <option value="card" data-i18n="dash_trans_method_card">Virement par Carte Bancaire</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_trans_type">Type de Virement</label>
+                        <select class="form-input" id="transType">
+                            <option value="standard" data-i18n="dash_trans_type_std">SEPA Standard (2-3 jours ouvrés)
+                            </option>
+                            <option value="express" data-i18n="dash_trans_type_express">SEPA Express (Instantané)
+                            </option>
+                        </select>
+                    </div>
+
+                    <div id="fields-bank">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="dash_trans_iban_dest">IBAN du Bénéficiaire</label>
+                            <input type="text" class="form-input" placeholder="FR76...">
+                        </div>
+                    </div>
+
+                    <div id="fields-card" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="dash_trans_card_num">Numéro de Carte à Débiter</label>
+                            <input type="text" class="form-input" id="transCardNum" placeholder="4000 0000 0000 0000">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="dash_trans_card_exp">Date Expiration</label>
+                                <input type="text" class="form-input" id="transCardExp" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="dash_trans_card_cvv">CVV</label>
+                                <input type="text" class="form-input" id="transCardCvv" placeholder="000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_trans_dest_name">Nom du Bénéficiaire</label>
+                        <input type="text" class="form-input" placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_trans_amount">Montant du virement (€)</label>
+                        <input type="number" class="form-input" id="transAmount" placeholder="0.00">
+                    </div>
+
+                    <button type="button" class="btn-premium" style="width: 100%; justify-content: center;"
+                        onclick="initiateTransfer()" data-i18n="dash_trans_submit">
+                        VALIDER LE TRANSFERT
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB: PROFIL -->
+        <div id="tab-profil" class="tab-content">
+            <header class="header-hero">
+                <h1 class="greeting" data-i18n="dash_profile_title">Édition du Profil</h1>
+                <p style="color: var(--text-muted);" data-i18n="dash_profile_subtitle">Mettez à jour vos coordonnées
+                    personnelles en toute sécurité.</p>
+            </header>
+
+            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
+                <form id="profileForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="dash_profile_phone">Numéro de Téléphone</label>
+                            <input type="text" id="profPhone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="dash_profile_email">Adresse Email</label>
+                            <input type="email" id="profEmail" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_profile_address">Adresse de Domicile</label>
+                        <input type="text" id="profAddress" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_profile_pass">Changer le Mot de Passe</label>
+                        <input type="password" id="profPass" class="form-input" placeholder="Nouveau mot de passe"
+                            data-i18n="dash_profile_pass_placeholder">
+                    </div>
+                    <button type="submit" class="btn-premium" style="width: 100%; justify-content: center;"
+                        data-i18n="dash_profile_save">
+                        SAUVEGARDER LES MODIFICATIONS
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB: SUPPORT -->
+        <div id="tab-support" class="tab-content">
+            <header class="header-hero">
+                <h1 class="greeting" data-i18n="dash_support_title">Support Client</h1>
+                <p style="color: var(--text-muted);" data-i18n="dash_support_subtitle">Assistance 24/7 pour vos
+                    opérations bancaires.</p>
+            </header>
+            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_support_subject">Sujet de votre demande</label>
+                        <select class="form-input">
+                            <option>Question sur un virement</option>
+                            <option>Activation de carte</option>
+                            <option>Contestation d'opération</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="dash_support_msg">Message</label>
+                        <textarea class="form-input" style="height: 150px; resize: none;"
+                            placeholder="Décrivez votre problème ici..."
+                            data-i18n="dash_support_placeholder"></textarea>
+                    </div>
+                    <button class="btn-premium" style="width: 100%; justify-content: center;"
+                        data-i18n="dash_support_submit">ENVOYER LE TICKET</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="modalCardRequest">
+        <div class="modal-card">
+            <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800;" data-i18n="dash_modal_card_title">
+                Activation de Carte</h2>
+            <div
+                style="background: var(--bg-light); padding: 2rem; border-radius: 24px; margin-bottom: 2.5rem; border: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600;" data-i18n="dash_modal_card_fee">Frais Visa Infinite</span>
+                    <span style="font-weight: 800; font-size: 1.5rem; color: var(--primary);">466,00 €</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="dash_modal_card_info">Votre carte
+                    sera active sous 24h après
+                    validation.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem;">
+                <button class="btn-premium" style="background: var(--bg-light); color: var(--dark);"
+                    onclick="closeModal('modalCardRequest')" data-i18n="dash_modal_cancel">ANNULER</button>
+                <button class="btn-premium" onclick="confirmCardActivation()"
+                    data-i18n="dash_modal_confirm">CONFIRMER</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalTransfer">
+        <div class="modal-card">
+            <h2 id="loadingTitle" style="font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800;"
+                data-i18n="dash_modal_security_title">Validation de
+                Sécurité</h2>
+
+            <div id="step-code">
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);" data-i18n="dash_modal_security_msg">Un code
+                    secret de transfert (TSC) est requis
+                    pour valider cette opération.</p>
+                <div class="form-group">
+                    <input type="password" class="form-input" id="transCode" placeholder="Entrez votre code TSC"
+                        style="text-align: center; letter-spacing: 5px; font-size: 1.5rem;"
+                        data-i18n="dash_modal_security_placeholder">
+                </div>
+                <button class="btn-premium" style="width: 100%; justify-content: center;" onclick="verifyTransferCode()"
+                    data-i18n="dash_modal_verify">VÉRIFIER LE CODE</button>
+            </div>
+
+            <div id="step-loading" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-bar" id="transBar"></div>
+                </div>
+                <div id="adminTask"
+                    style="background: var(--bg-light); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary); margin-top: 1rem;">
+                    <p id="taskMsg" style="font-size: 0.85rem; font-weight: 600;" data-i18n="dash_modal_processing">
+                        Traitement en cours...</p>
+                </div>
+            </div>
+
+            <button class="btn-premium"
+                style="background: none; color: var(--text-muted); width: 100%; margin-top: 2rem; font-size: 0.7rem;"
+                onclick="closeModal('modalTransfer')" data-i18n="dash_modal_cancel_op">ANNULER L'OPÉRATION</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Sécurité Client (Session Manuelle)
+        async function checkAccess() {
+            const email = localStorage.getItem('sb_user_email');
+            const role = localStorage.getItem('sb_user_role');
+
+            if (!email || isSessionExpired() || role !== 'CLIENT') {
+                clearAuthSession();
+                window.location.href = '../../login.html';
+                return;
+            }
+            document.body.style.display = 'block';
+        }
+        checkAccess();
+
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            clearAuthSession();
+            window.location.href = '../../login.html';
+        });
+    </script>
+    <script src="../../js/dashboard-client.js"></script>
+    <script> lucide.createIcons(); </script>
+</body>
+
+</html>

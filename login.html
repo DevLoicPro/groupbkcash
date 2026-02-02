@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Elite - GROUPBKCASH</title>
-    <meta name="description" content="Accédez à votre espace bancaire sécurisé GROUPBKCASH.">
+    <title data-i18n="login_title">Connexion Elite - GROUPBKCASH</title>
+    <meta name="description" content="Accédez à votre espace bancaire sécurisé GROUPBKCASH." data-i18n="login_subtitle">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,50 +16,61 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
     <header id="main-header" class="header">
         <!-- Header will be injected by js/layout.js -->
     </header>
 
-    <main class="login-main">
+    <main class="login-container">
         <div class="login-card">
-            <div class="login-title-group">
-                <h1>Connexion Elite</h1>
-                <p>Accédez à votre espace bancaire sécurisé</p>
+            <div class="login-header">
+                <div class="login-logo">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h1 data-i18n="login_title">CONNEXION ELITE</h1>
+                <p data-i18n="login_subtitle">Identifiez-vous pour accéder à votre console de gestion.</p>
             </div>
 
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="identifier">Identifiant</label>
-                    <div class="input-wrapper">
-                        <i data-lucide="user" class="prefix-icon"></i>
-                        <input type="text" id="identifier" class="login-control" placeholder="Votre identifiant"
-                            required>
-                    </div>
+            <!-- Identifiant -->
+            <div class="form-group">
+                <label for="identifier" data-i18n="login_id">Identifiant</label>
+                <div class="input-wrapper">
+                    <i data-lucide="user"></i>
+                    <input type="text" id="identifier" placeholder="Votre identifiant" data-i18n="login_id_placeholder"
+                        required>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="label-row">
-                        <label for="password">Mot de passe</label>
-                        <a href="#" class="forgot-link">Oublié ?</a>
-                    </div>
-                    <div class="input-wrapper">
-                        <i data-lucide="lock" class="prefix-icon"></i>
-                        <input type="password" id="password" class="login-control" placeholder="••••••••" required>
-                        <i data-lucide="eye" class="suffix-icon" id="togglePassword"></i>
-                    </div>
+            <!-- Mot de passe -->
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <label for="password" style="margin-bottom: 0;" data-i18n="login_pass">Mot de passe</label>
+                    <a href="#" class="forgot-link" data-i18n="login_forgot">Oublié ?</a>
                 </div>
+                <div class="input-wrapper">
+                    <i data-lucide="lock"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                    <button type="button" class="toggle-password">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+            </div>
 
-                <button type="submit" class="login-btn" id="loginBtn">Se connecter</button>
-            </form>
+            <button class="login-btn" id="loginBtn">
+                <span data-i18n="login_submit">SE CONNECTER</span>
+                <i data-lucide="arrow-right"></i>
+            </button>
 
-            <div class="new-account">
-                Nouveau sur la plateforme ? <a href="register.html">Créer un compte</a>
+            <div class="login-footer">
+                <p><span data-i18n="login_new">Nouveau sur la plateforme ?</span> <a href="register.html"
+                        data-i18n="login_create">Créer un compte</a>
+                </p>
             </div>
         </div>
     </main>
@@ -68,15 +79,17 @@
         <!-- Footer will be injected by js/layout.js -->
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/layout.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/ui-utils.js"></script>
     <script src="js/main.js"></script>
     <script src="js/login.js"></script>
     <script>
         lucide.createIcons();
 
         // Password visibility toggle
-        const togglePassword = document.querySelector('#togglePassword');
+        const togglePassword = document.querySelector('.toggle-password');
         const passwordInput = document.querySelector('#password');
 
         if (togglePassword) {

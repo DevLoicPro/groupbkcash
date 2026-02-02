@@ -31,12 +31,12 @@
         <header class="page-header">
             <div class="container">
                 <nav class="breadcrumb">
-                    <a href="index.html">Accueil</a>
+                    <a href="index.html" data-i18n="about_breadcrumb_home">Accueil</a>
                     <i data-lucide="chevron-right"></i>
-                    <span>Contact</span>
+                    <span data-i18n="nav_contact">Contact</span>
                 </nav>
-                <h1>Nous contacter</h1>
-                <p>Nos conseillers sont là pour vous accompagner.</p>
+                <h1 data-i18n="contact_title">Nous contacter</h1>
+                <p data-i18n="contact_subtitle">Nos conseillers sont là pour vous accompagner.</p>
             </div>
         </header>
 
@@ -44,7 +44,7 @@
         <section class="section">
             <div class="container">
                 <div style="text-align: center; max-width: 800px; margin: 0 auto 4rem;">
-                    <h2 class="section-title">Nos conseillers sont à votre écoute</h2>
+                    <h2 class="section-title" data-i18n="contact_hearing">Nos conseillers sont à votre écoute</h2>
 
                     <div class="phone-info-card">
                         <div class="icon-circle" style="margin: 0 auto 1.5rem; background: var(--white);">
@@ -54,14 +54,17 @@
                         <a href="tel:0374471050" class="phone-number-link">
                             03 74 47 10 50
                         </a>
-                        <p style="font-size: 1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1.5rem;">
+                        <p style="font-size: 1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 1.5rem;"
+                            data-i18n="contact_cost">
                             Coût d'un appel local depuis un poste fixe
                         </p>
                         <div class="phone-hours">
-                            <p style="margin-bottom: 0.2rem; color: var(--text);">Du lundi au vendredi, de 9h à 18h</p>
-                            <p style="margin-bottom: 0; color: var(--text);">et le samedi, de 9h à 14h</p>
-                            <p
-                                style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;">
+                            <p style="margin-bottom: 0.2rem; color: var(--text);" data-i18n="contact_hours1">Du lundi au
+                                vendredi, de 9h à 18h</p>
+                            <p style="margin-bottom: 0; color: var(--text);" data-i18n="contact_hours2">et le samedi, de
+                                9h à 14h</p>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;"
+                                data-i18n="contact_timezone">
                                 (fuseau horaire de la France métropolitaine)</p>
                         </div>
                     </div>
@@ -70,52 +73,55 @@
                 <!-- Contact Form -->
                 <div class="contact-form-card">
                     <div class="form-header">
-                        <h2>Envoyez-nous un message</h2>
-                        <p>Nous vous répondrons dans les plus brefs délais.</p>
+                        <h2 data-i18n="contact_form_title">Envoyez-nous un message</h2>
+                        <p data-i18n="contact_form_subtitle">Nous vous répondrons dans les plus brefs délais.</p>
                     </div>
 
                     <form id="contactForm" class="modern-form">
                         <div class="form-row">
                             <div class="input-group">
-                                <label for="prenom">Prénom</label>
-                                <input type="text" id="prenom" placeholder="Jean" required>
+                                <label for="prenom" data-i18n="contact_first_name">Prénom</label>
+                                <input type="text" id="prenom" placeholder="Jean" data-i18n="contact_first_name"
+                                    required>
                             </div>
                             <div class="input-group">
-                                <label for="nom">Nom</label>
-                                <input type="text" id="nom" placeholder="Dupont" required>
+                                <label for="nom" data-i18n="contact_last_name">Nom</label>
+                                <input type="text" id="nom" placeholder="Dupont" data-i18n="contact_last_name" required>
                             </div>
                         </div>
 
                         <div class="input-group">
-                            <label for="email">Adresse email</label>
-                            <input type="email" id="email" placeholder="jean.dupont@exemple.com" required>
+                            <label for="email" data-i18n="reg_email">Adresse email</label>
+                            <input type="email" id="email" placeholder="jean.dupont@exemple.com" data-i18n="reg_email"
+                                required>
                         </div>
 
                         <div class="input-group">
-                            <label for="subject">Sujet de votre demande</label>
+                            <label for="subject" data-i18n="contact_subject">Sujet de votre demande</label>
                             <select id="subject" required>
-                                <option value="" disabled selected>Sélectionnez un sujet</option>
-                                <option value="ouverture">Ouverture de compte</option>
-                                <option value="info">Renseignements</option>
-                                <option value="tech">Support technique</option>
-                                <option value="rdv">Prendre rendez-vous</option>
+                                <option value="" disabled selected data-i18n="contact_subject_placeholder">Sélectionnez
+                                    un sujet</option>
+                                <option value="ouverture" data-i18n="contact_subject_opt1">Ouverture de compte</option>
+                                <option value="info" data-i18n="contact_subject_opt2">Renseignements</option>
+                                <option value="tech" data-i18n="contact_subject_opt3">Support technique</option>
+                                <option value="rdv" data-i18n="contact_subject_opt4">Prendre rendez-vous</option>
                             </select>
                         </div>
 
                         <div class="input-group">
-                            <label for="message">Votre message</label>
+                            <label for="message" data-i18n="contact_message">Votre message</label>
                             <textarea id="message" rows="6" placeholder="Comment pouvons-nous vous aider ?"
-                                required></textarea>
+                                data-i18n="contact_message_placeholder" required></textarea>
                         </div>
 
                         <div class="form-footer">
-                            <p class="privacy-note">
+                            <p class="privacy-note" data-i18n="contact_privacy">
                                 <i data-lucide="shield-check"></i>
                                 Vos données sont sécurisées et traitées conformément à notre politique de
                                 confidentialité.
                             </p>
                             <button type="submit" class="btn btn-primary submit-btn">
-                                <span>Envoyer le message</span>
+                                <span data-i18n="contact_submit">Envoyer le message</span>
                                 <i data-lucide="send"></i>
                             </button>
                         </div>
@@ -126,9 +132,11 @@
                         <div class="success-icon-wrapper">
                             <i data-lucide="check"></i>
                         </div>
-                        <h3>Message envoyé !</h3>
-                        <p>Merci pour votre confiance. Un conseiller vous recontactera sous 24h.</p>
-                        <button type="button" class="btn btn-outline" onclick="location.reload()">Envoyer un autre
+                        <h3 data-i18n="contact_success_title">Message envoyé !</h3>
+                        <p data-i18n="contact_success_desc">Merci pour votre confiance. Un conseiller vous recontactera
+                            sous 24h.</p>
+                        <button type="button" class="btn btn-outline" onclick="location.reload()"
+                            data-i18n="contact_success_btn">Envoyer un autre
                             message</button>
                     </div>
                 </div>
@@ -138,23 +146,24 @@
         <!-- Legal Notice -->
         <section class="legal-notice">
             <div class="container">
-                <p style="margin-bottom: 1.5rem;">
+                <p style="margin-bottom: 1.5rem;" data-i18n="contact_legal_p1">
                     La GROUPBKCASH Banque Populaire en tant que responsable de traitement, recueille et traite des
                     données à caractère personnel vous concernant. Vous pouvez accéder à notre page d’information à tout
-                    moment, sur notre site internet <a href="mailto:contact@group-bkcash.com"
-                        style="color: var(--primary);">www.contact@group-bkcash.com</a> (rubrique « Protection des
+                    moment, sur notre site internet www.contact@group-bkcash.com (rubrique « Protection des
                     données personnelles » en bas de page du site) qui vous explique pourquoi et comment ces données
                     sont utilisées, à qui elles sont destinées, combien de temps elles seront conservées et les bases
                     légale sur laquelle repose le traitement.
                 </p>
                 <p>
-                    Si vous souhaitez en savoir plus sur la protection de vos données à caractère personnel, ou
-                    contacter notre Délégué à la Protection des Données, vous pouvez nous écrire à l’adresse suivante :
+                    <span data-i18n="contact_legal_p2">Si vous souhaitez en savoir plus sur la protection de vos données
+                        à caractère personnel, ou
+                        contacter notre Délégué à la Protection des Données, vous pouvez nous écrire à l’adresse
+                        suivante :</span>
                     <br>
-                    <strong>GROUPBKCASH Banque Populaire - Délégué à la Protection des Données - 4, route de la Pyramide
-                        - 75132 PARIS CEDEX 12</strong> ; <br>
-                    ou par courriel à : <a href="mailto:contact@group-bkcash.com"
-                        style="color: var(--primary);">contact@group-bkcash.com</a>.
+                    <strong data-i18n="contact_legal_p3">GROUPBKCASH Banque Populaire - Délégué à la Protection des
+                        Données - 4, route de la Pyramide
+                        - 75132 PARIS CEDEX 12 ; <br>
+                        ou par courriel à : contact@group-bkcash.com.</strong>
                 </p>
             </div>
         </section>
@@ -164,6 +173,7 @@
         <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="js/layout.js"></script>
     <script src="js/main.js"></script>
     <script>
@@ -179,7 +189,7 @@
             const originalContent = submitBtn.innerHTML;
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Envoi en cours...</span>';
+            submitBtn.innerHTML = `<span>${window.i18n.t('contact_sending')}</span>`;
 
             setTimeout(() => {
                 form.style.display = 'none';

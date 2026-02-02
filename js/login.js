@@ -1,7 +1,5 @@
-// Configuration Supabase
-const supabaseUrl = "https://dwipqqwuqfwcdgugugqw.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3aXBxcXd1cWZ3Y2RndWd1Z3F3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgzOTAxMTQsImV4cCI6MjA4Mzk2NjExNH0.bZ-wOSMNp8U5V6b9QSCUuzQUczYs7L-mwsjpwh_uSZk";
-const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// La configuration est maintenant dans js/supabase-config.js
+// On s'assure qu'il est chargé avant ce script.
 
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
@@ -18,47 +16,58 @@ document.addEventListener('DOMContentLoaded', function () {
             loginBtn.disabled = true;
 
             try {
-                // Recherche plus flexible : par email OU par Identifiant Client (BK-XXX-XXX)
-                const { data: users, error } = await _supabase
-                    .from('bank_accounts')
-                    .select('*')
-                    .or(`email.eq.${identifier.toLowerCase()},client_id.eq.${identifier.toUpperCase()}`);
+                // 1. Recherche de l'utilisateur dans la table bank_accounts (SANS AUTH)
+                let query = _supabase.from('bank_accounts').select('*');
 
-                if (error || !users || users.length === 0) {
-                    throw new Error('Identifiant incorrect.');
+                if (identifier.toUpperCase().startsWith('BK-')) {
+                    query = query.eq('client_id', identifier.toUpperCase());
+                } else {
+                    query = query.eq('email', identifier.toLowerCase());
                 }
 
-                // Pour chaque utilisateur trouvé (normalement un seul), on vérifie le mot de passe
-                const user = users.find(u => u.password === password || u.temp_password === password);
+                const { data: user, error: findError } = await query.maybeSingle();
 
+                if (findError) throw findError;
+
+                // 2. Vérification de l'existence et du mot de passe
                 if (!user) {
+                    throw new Error('Identifiant non trouvé.');
+                }
+
+                if (user.password !== password) {
                     throw new Error('Mot de passe incorrect.');
                 }
 
-                // Vérification du statut
-                if (user.account_status === 'en_attente') {
+                // 3. Vérification du statut du compte
+                const status = (user.account_status || 'en_attente').toLowerCase();
+                if (status === 'en_attente') {
                     throw new Error('Votre compte est toujours en attente de validation administrative.');
                 }
-
-                if (user.account_status === 'suspendu') {
-                    throw new Error('Votre compte a été suspendu par nos services.');
+                if (status === 'suspendu' || status === 'bloqué') {
+                    throw new Error('Votre compte est suspendu ou bloqué. Veuillez contacter un administrateur.');
+                }
+                if (status !== 'actif') {
+                    throw new Error('Le statut de votre compte ne permet pas la connexion (' + status + ').');
                 }
 
-                // Mise à jour de la dernière connexion (optionnel mais recommandé)
-                await _supabase
-                    .from('bank_accounts')
-                    .update({ last_login: new Date().toISOString() })
-                    .eq('id', user.id);
+                // 4. Session manuelle dans localStorage
+                const userRole = (user.role || 'CLIENT').toUpperCase();
+                localStorage.setItem('sb_user_email', user.email);
+                localStorage.setItem('sb_user_role', userRole);
 
-                // Stockage des informations utilisateur en session pour le dashboard
-                sessionStorage.setItem('clientToken', 'BK-AUTH-' + Math.random().toString(36).substr(2, 9));
-                sessionStorage.setItem('clientData', JSON.stringify(user));
+                // Expiration de 10 minutes
+                const expiry = Date.now() + (10 * 60 * 1000);
+                localStorage.setItem('sb_session_expiry', expiry.toString());
 
-                // Succès -> Redirection
-                window.location.href = 'dashboard.html';
+                UI.notify("Connexion réussie ! Redirection...", "success");
+
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
 
             } catch (error) {
-                alert(error.message || 'Une erreur est survenue lors de la connexion.');
+                console.error('Login error:', error);
+                UI.notify(error.message || 'Une erreur est survenue lors de la connexion.', "error");
                 loginBtn.innerHTML = 'Se connecter';
                 loginBtn.disabled = false;
             }

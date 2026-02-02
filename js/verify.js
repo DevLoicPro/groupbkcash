@@ -1,7 +1,5 @@
-// Configuration Supabase
-const supabaseUrl = "https://dwipqqwuqfwcdgugugqw.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3aXBxcXd1cWZ3Y2RndWd1Z3F3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgzOTAxMTQsImV4cCI6MjA4Mzk2NjExNH0.bZ-wOSMNp8U5V6b9QSCUuzQUczYs7L-mwsjpwh_uSZk";
-const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// La configuration est maintenant dans js/supabase-config.js
+// On l'utilise via le client global _supabase
 
 document.addEventListener('DOMContentLoaded', function () {
     if (!sessionStorage.getItem('fromRegister')) {

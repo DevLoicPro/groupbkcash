@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Officielle - GROUPBKCASH</title>
-    <meta name="description" content="Initialisez votre dossier bancaire haute performance chez GROUPBKCASH.">
+    <title data-i18n="reg_title">Inscription Officielle - GROUPBKCASH</title>
+    <meta name="description" content="Initialisez votre dossier bancaire haute performance chez GROUPBKCASH."
+        data-i18n="reg_subtitle">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,8 +35,9 @@
 
     <main class="register-container">
         <div class="form-title-group">
-            <h1>Inscription Officielle</h1>
-            <p>Veuillez renseigner les informations ci-dessous pour initialiser votre dossier bancaire haute
+            <h1 data-i18n="reg_title">Inscription Officielle</h1>
+            <p data-i18n="reg_subtitle">Veuillez renseigner les informations ci-dessous pour initialiser votre dossier
+                bancaire haute
                 performance.</p>
         </div>
 
@@ -46,37 +48,37 @@
                 <section class="form-section">
                     <div class="section-header">
                         <i data-lucide="user"></i>
-                        <h2>01. INFORMATIONS PERSONNELLES</h2>
+                        <h2 data-i18n="reg_sec1">01. INFORMATIONS PERSONNELLES</h2>
                     </div>
                     <div class="form-grid">
                         <div class="form-group half-width">
-                            <label for="civility">Civilité</label>
+                            <label for="civility" data-i18n="reg_civility">Civilité</label>
                             <select id="civility" class="form-control" required>
-                                <option value="Monsieur">Monsieur</option>
-                                <option value="Madame">Madame</option>
+                                <option value="Monsieur" data-i18n="reg_mr">Monsieur</option>
+                                <option value="Madame" data-i18n="reg_mrs">Madame</option>
                             </select>
                         </div>
                         <div class="form-group half-width">
-                            <label for="last_name">Nom de naissance</label>
+                            <label for="last_name" data-i18n="reg_last_name">Nom de naissance</label>
                             <input type="text" id="last_name" class="form-control" placeholder="ex: DUPONT" required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="first_name">Prénom</label>
+                            <label for="first_name" data-i18n="reg_first_name">Prénom</label>
                             <input type="text" id="first_name" class="form-control" placeholder="ex: Jean-Pierre"
                                 required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="nationality">Nationalité</label>
+                            <label for="nationality" data-i18n="reg_nationality">Nationalité</label>
                             <input type="text" id="nationality" class="form-control" placeholder="Française" required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="marital_status">Situation matrimoniale</label>
+                            <label for="marital_status" data-i18n="reg_marital">Situation matrimoniale</label>
                             <select id="marital_status" class="form-control" required>
-                                <option value="Celibataire">Célibataire</option>
-                                <option value="Marie">Marié(e)</option>
-                                <option value="Pacse">Pacsé(e)</option>
-                                <option value="Divorce">Divorcé(e)</option>
-                                <option value="Veuf">Veuf/Veuve</option>
+                                <option value="Celibataire" data-i18n="reg_single">Célibataire</option>
+                                <option value="Marie" data-i18n="reg_married">Marié(e)</option>
+                                <option value="Pacse" data-i18n="reg_pacse">Pacsé(e)</option>
+                                <option value="Divorce" data-i18n="reg_divorced">Divorcé(e)</option>
+                                <option value="Veuf" data-i18n="reg_widow">Veuf/Veuve</option>
                             </select>
                         </div>
                     </div>
@@ -86,20 +88,20 @@
                 <section class="form-section">
                     <div class="section-header">
                         <i data-lucide="map-pin"></i>
-                        <h2>02. COORDONNÉES</h2>
+                        <h2 data-i18n="reg_sec2">02. COORDONNÉES</h2>
                     </div>
                     <div class="form-grid">
                         <div class="form-group full-width">
-                            <label for="phone">Téléphone mobile</label>
+                            <label for="phone" data-i18n="reg_phone">Téléphone mobile</label>
                             <input type="tel" id="phone" class="form-control" placeholder="+33 6 00 00 00 00" required>
                         </div>
                         <div class="form-group full-width">
-                            <label for="email">Adresse e-mail</label>
+                            <label for="email" data-i18n="reg_email">Adresse e-mail</label>
                             <input type="email" id="email" class="form-control" placeholder="contact@domaine.com"
                                 required>
                         </div>
                         <div class="form-group full-width">
-                            <label for="address">Adresse de domicile</label>
+                            <label for="address" data-i18n="reg_address">Adresse de domicile</label>
                             <input type="text" id="address" class="form-control"
                                 placeholder="15 Avenue des Champs-Élysées, 75008 Paris" required>
                         </div>
@@ -110,16 +112,17 @@
                 <section class="form-section">
                     <div class="section-header">
                         <i data-lucide="briefcase"></i>
-                        <h2>03. SITUATION PROFESSIONNELLE & FINANCIÈRE</h2>
+                        <h2 data-i18n="reg_sec3">03. SITUATION PROFESSIONNELLE & FINANCIÈRE</h2>
                     </div>
                     <div class="form-grid">
                         <div class="form-group half-width">
-                            <label for="profession">Profession</label>
+                            <label for="profession" data-i18n="reg_profession">Profession</label>
                             <input type="text" id="profession" class="form-control"
-                                placeholder="Cadre supérieur, Indépendant..." required>
+                                placeholder="Cadre supérieur, Indépendant..." data-i18n="reg_profession_placeholder"
+                                required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="income">Revenu mensuel net</label>
+                            <label for="income" data-i18n="reg_income">Revenu mensuel net</label>
                             <div class="input-currency-wrapper">
                                 <input type="number" id="income" class="form-control" placeholder="5000" required>
                                 <span class="currency-symbol">€</span>
@@ -132,28 +135,30 @@
                 <section class="form-section">
                     <div class="section-header">
                         <i data-lucide="shield"></i>
-                        <h2>04. SÉCURITÉ DU COMPTE</h2>
+                        <h2 data-i18n="reg_sec4">04. SÉCURITÉ DU COMPTE</h2>
                     </div>
                     <div class="form-grid">
                         <div class="form-group full-width">
-                            <label for="security_question">Question de sécurité</label>
+                            <label for="security_question" data-i18n="reg_sec_q">Question de sécurité</label>
                             <select id="security_question" class="form-control" required>
-                                <option value="mother">Nom de jeune fille de votre mère ?</option>
-                                <option value="pet">Nom de votre premier animal ?</option>
-                                <option value="city">Votre ville de naissance ?</option>
+                                <option value="mother" data-i18n="reg_sec_q_mother">Nom de jeune fille de votre mère ?
+                                </option>
+                                <option value="pet" data-i18n="reg_sec_q_pet">Nom de votre premier animal ?</option>
+                                <option value="city" data-i18n="reg_sec_q_city">Votre ville de naissance ?</option>
                             </select>
                         </div>
                         <div class="form-group full-width">
-                            <label for="security_answer">Réponse</label>
+                            <label for="security_answer" data-i18n="reg_sec_a">Réponse</label>
                             <input type="text" id="security_answer" class="form-control"
                                 placeholder="Votre réponse secrète" required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="password">Mot de passe</label>
+                            <label for="password" data-i18n="reg_pass">Mot de passe</label>
                             <input type="password" id="password" class="form-control" placeholder="••••••••" required>
                         </div>
                         <div class="form-group half-width">
-                            <label for="confirm_password">Confirmation du mot de passe</label>
+                            <label for="confirm_password" data-i18n="reg_pass_confirm">Confirmation du mot de
+                                passe</label>
                             <input type="password" id="confirm_password" class="form-control" placeholder="••••••••"
                                 required>
                         </div>
@@ -163,27 +168,29 @@
                 <div class="admin-validation">
                     <i data-lucide="check-circle-2"></i>
                     <div class="admin-validation-content">
-                        <h3>Validation administrative</h3>
-                        <p>Pour garantir l'intégrité de notre réseau, chaque demande d'adhésion est soumise à une revue
+                        <h3 data-i18n="reg_admin_val">Validation administrative</h3>
+                        <p data-i18n="reg_admin_val_desc">Pour garantir l'intégrité de notre réseau, chaque demande
+                            d'adhésion est soumise à une revue
                             manuelle. Le délai de traitement moyen est de 24 heures.</p>
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn-large" id="submitBtn">
+                <button type="submit" class="submit-btn-large" id="submitBtn" data-i18n="reg_submit">
                     CRÉER MON COMPTE
                     <i data-lucide="arrow-right"></i>
                 </button>
 
-                <div class="form-footer-note">
-                    En cliquant sur "Créer mon compte", vous confirmez avoir pris connaissance de notre
-                    <a href="#">Politique de Confidentialité</a> et de nos conditions générales d'utilisation.
-                    Vos données sont cryptées (AES-256).
+                <div class="form-footer-note" data-i18n="reg_footer">
+                    En cliquant sur "Créer mon compte", vous confirmez avoir pris connaissance de notre <a
+                        href="#">Politique de Confidentialité</a> et de nos conditions générales d'utilisation. Vos
+                    données sont cryptées (AES-256).
                 </div>
             </div>
         </form>
 
         <div class="identifiez-vous">
-            Déjà membre ? <a href="login.html">Identifiez-vous</a>
+            <span data-i18n="reg_already">Déjà membre ?</span> <a href="login.html"
+                data-i18n="login_submit">Identifiez-vous</a>
         </div>
     </main>
 
@@ -191,7 +198,10 @@
         <!-- Footer will be injected by js/layout.js -->
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="js/layout.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/ui-utils.js"></script>
     <script src="js/main.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/register.js"></script>

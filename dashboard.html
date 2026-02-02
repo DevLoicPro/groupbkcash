@@ -4,436 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Espace Client - GROUPBKCASH</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono&display=swap"
-        rel="stylesheet">
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <link rel="stylesheet" href="css/dashboard.css">
+    <title>Dashboard - GROUPBKCASH</title>
+    <!-- On charge Supabase pour vérifier la session réelle si besoin -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
 </head>
 
-<body>
-
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <i data-lucide="shield-check" style="color: var(--primary);"></i>
-                <span>GROUPBK<span>CASH</span></span>
-            </div>
+<body
+    style="background: #0a0a0b; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
+    <div style="text-align: center;">
+        <div
+            style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #ff6600; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;">
         </div>
-
-        <nav class="sidebar-menu">
-            <div class="menu-label">Menu Principal</div>
-            <a href="#" class="menu-link active" data-tab="overview">
-                <i data-lucide="layout-dashboard"></i>
-                <span>Tableau de Bord</span>
-            </a>
-            <a href="#" class="menu-link" data-tab="virements">
-                <i data-lucide="arrow-right-circle"></i>
-                <span>Virements</span>
-            </a>
-            <a href="#" class="menu-link" data-tab="profil">
-                <i data-lucide="user"></i>
-                <span>Mon Profil</span>
-            </a>
-
-            <div class="menu-label">Services</div>
-            <a href="#" class="menu-link" data-tab="support">
-                <i data-lucide="message-square"></i>
-                <span>Support Client</span>
-            </a>
-            <a href="#" class="menu-link" data-tab="notifications">
-                <i data-lucide="bell"></i>
-                <span>Notifications</span>
-            </a>
-        </nav>
-
-        <div class="sidebar-footer">
-            <a href="index.html" class="logout-link">
-                <i data-lucide="log-out"></i>
-                <span>Se déconnecter</span>
-            </a>
-        </div>
-    </aside>
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="mobile-nav">
-        <a href="#" class="mobile-nav-link active" data-tab="overview">
-            <i data-lucide="layout-dashboard"></i>
-            <span>Dashboard</span>
-        </a>
-        <a href="#" class="mobile-nav-link" data-tab="virements">
-            <i data-lucide="arrow-right-circle"></i>
-            <span>Virements</span>
-        </a>
-        <a href="#" class="mobile-nav-link" data-tab="profil">
-            <i data-lucide="user"></i>
-            <span>Profil</span>
-        </a>
-        <a href="#" class="mobile-nav-link" data-tab="support">
-            <i data-lucide="message-square"></i>
-            <span>Support</span>
-        </a>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-wrapper">
-
-        <!-- TAB: OVERVIEW (Actions 2, 3, 6, 7) -->
-        <div id="tab-overview" class="tab-content active">
-            <header class="header-hero" style="margin-bottom: 2rem;">
-                <h1 class="greeting">Bonjour <span id="clientFirstName">Prénom</span> 👋</h1>
-            </header>
-
-            <!-- Card Section - Centered Layout -->
-            <div style="max-width: 600px; margin: 0 auto 4rem; text-align: center;">
-                <!-- Status Pills Above Card -->
-                <div class="pills-container" style="margin-bottom: 2rem;">
-                    <span class="pill pill-green" id="headerStatus">Compte Actif</span>
-                    <span class="pill pill-orange">Privilège Elite</span>
-                </div>
-
-                <!-- Card Visual with Status Badge -->
-                <div class="card-preview" style="margin-bottom: 1.5rem; position: relative;">
-                    <!-- Inactive Badge Overlay -->
-                    <div id="cardInactiveOverlay" class="card-overlay" style="display: none;">
-                        <div
-                            style="background: rgba(0,0,0,0.85); padding: 1rem 2rem; border-radius: 12px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: white; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                            CARTE BANCAIRE INACTIVE
-                        </div>
-                    </div>
-
-                    <!-- Chip & Contactless -->
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div class="card-chip"></div>
-                        <i data-lucide="wifi" style="opacity: 0.5; width: 20px; height: 20px;"></i>
-                    </div>
-
-                    <!-- Card Number Section -->
-                    <div class="card-number" id="dispCardNum">
-                        •••• •••• •••• 1234
-                    </div>
-
-                    <!-- Footer Card Section -->
-                    <div class="card-holder-info">
-                        <div style="flex: 1;">
-                            <div class="card-label">Titulaire de la carte</div>
-                            <div class="card-value" id="dispCardName">PRÉNOM NOM</div>
-                        </div>
-
-                        <div style="display: flex; gap: 1.2rem; margin-right: 1.5rem;">
-                            <div>
-                                <div class="card-label">VALID THRU</div>
-                                <div class="card-value" id="dispCardExp">09/27</div>
-                            </div>
-                            <div>
-                                <div class="card-label">CVV</div>
-                                <div class="card-value" id="dispCardCvv">***</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Message Below Card -->
-                <p id="cardStatusMessage" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                    Votre carte bancaire n'est pas encore active.
-                </p>
-
-                <!-- Action Button -->
-                <button class="btn-premium" onclick="openCardRequestModal()" id="cardActionBtn"
-                    style="display: inline-flex; background: var(--dark); color: white;">
-                    <i data-lucide="credit-card" style="width: 18px; height: 18px;"></i>
-                    DEMANDER UNE CARTE
-                </button>
-            </div>
-
-            <!-- Balances Section (Action 3) -->
-            <div class="balance-grid"
-                style="margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <div class="balance-box">
-                    <span class="balance-label">Solde Principal</span>
-                    <p class="balance-amount" id="balancePrimary">€0,00</p>
-                </div>
-                <div class="balance-box">
-                    <span class="balance-label">Total Économisé</span>
-                    <p class="balance-amount" id="balanceAvailable">€0,00</p>
-                </div>
-            </div>
-
-            <!-- Transactions List (Action 7) -->
-            <div class="dashboard-section">
-                <h2 class="section-title">Opérations Récentes</h2>
-                <div id="transactionsList" style="text-align: center; padding: 2rem; color: var(--text-muted);">
-                    <i data-lucide="loader-2" class="animate-spin" style="margin-bottom: 1rem;"></i>
-                    <p>Chargement de vos opérations...</p>
-                </div>
-            </div>
-
-            <!-- Account Details (Action 2 - Read Only) -->
-            <div class="dashboard-section">
-                <h2 class="section-title">Informations de Compte (Lecture Seule)</h2>
-                <div class="details-grid">
-                    <div>
-                        <span class="form-label">Nom & Prénom</span>
-                        <div style="font-weight: 700; color: var(--dark);" id="infoName">...</div>
-                    </div>
-                    <div>
-                        <span class="form-label">Statut du Compte</span>
-                        <div style="font-weight: 700; color: var(--status-active);" id="infoStatus">...</div>
-                    </div>
-                    <div>
-                        <span class="form-label">Identifiant Client (ID)</span>
-                        <div style="font-weight: 700; font-family: monospace;" id="infoClientId">...</div>
-                    </div>
-                    <div>
-                        <span class="form-label">Numéro de Compte</span>
-                        <div style="font-weight: 700; font-family: monospace;" id="infoAccNum">...</div>
-                    </div>
-                    <div style="grid-column: span 2;">
-                        <span class="form-label">IBAN</span>
-                        <div style="font-weight: 700; font-family: monospace;" id="infoIban">...</div>
-                    </div>
-                    <div>
-                        <span class="form-label">Code SWIFT (BIC)</span>
-                        <div style="font-weight: 700; font-family: monospace;" id="infoSwift">...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: VIREMENTS (Action 10) -->
-        <div id="tab-virements" class="tab-content">
-            <header class="header-hero">
-                <h1 class="greeting">Virements & Transferts</h1>
-                <p style="color: var(--text-muted);">Service SEPA EXPRESS & STANDARD sécurisé.</p>
-            </header>
-
-            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
-                <form id="transferForm">
-                    <div class="form-group">
-                        <label class="form-label">Méthode de Virement</label>
-                        <select class="form-input" id="transMethod" onchange="toggleTransferUI()">
-                            <option value="bank">Virement Bancaire (Compte à Compte)</option>
-                            <option value="card">Virement par Carte Bancaire</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Type de Virement</label>
-                        <select class="form-input" id="transType">
-                            <option value="standard">SEPA Standard (2-3 jours ouvrés)</option>
-                            <option value="express">SEPA Express (Instantané)</option>
-                        </select>
-                    </div>
-
-                    <!-- Fields for Bank -->
-                    <div id="fields-bank">
-                        <div class="form-group">
-                            <label class="form-label">IBAN du Bénéficiaire</label>
-                            <input type="text" class="form-input" placeholder="FR76...">
-                        </div>
-                    </div>
-
-                    <!-- Fields for Card -->
-                    <div id="fields-card" style="display: none;">
-                        <div class="form-group">
-                            <label class="form-label">Numéro de Carte à Débiter</label>
-                            <input type="text" class="form-input" id="transCardNum" placeholder="4000 0000 0000 0000">
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div class="form-group">
-                                <label class="form-label">Date Expiration</label>
-                                <input type="text" class="form-input" id="transCardExp" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">CVV</label>
-                                <input type="text" class="form-input" id="transCardCvv" placeholder="000">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Nom du Bénéficiaire</label>
-                        <input type="text" class="form-input" placeholder="Ex: Jean Dupont">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Montant du virement (€)</label>
-                        <input type="number" class="form-input" id="transAmount" placeholder="0.00">
-                    </div>
-
-                    <button type="button" class="btn-premium" style="width: 100%; justify-content: center;"
-                        onclick="initiateTransfer()">
-                        VALIDER LE TRANSFERT
-                    </button>
-                    <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">
-                        Un code de vérification vous sera envoyé par email pour confirmer l'opération.
-                    </p>
-                </form>
-            </div>
-        </div>
-
-        <!-- TAB: PROFIL (Action 4) -->
-        <div id="tab-profil" class="tab-content">
-            <header class="header-hero">
-                <h1 class="greeting">Édition du Profil</h1>
-                <p style="color: var(--text-muted);">Mettez à jour vos coordonnées personnelles en toute sécurité.</p>
-            </header>
-
-            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
-                <form id="profileForm">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                        <div class="form-group">
-                            <label class="form-label">Numéro de Téléphone</label>
-                            <input type="text" id="profPhone" class="form-input">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Adresse Email</label>
-                            <input type="email" id="profEmail" class="form-input">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Adresse de Domicile</label>
-                        <input type="text" id="profAddress" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Changer le Mot de Passe</label>
-                        <input type="password" id="profPass" class="form-input" placeholder="Nouveau mot de passe">
-                    </div>
-                    <button type="submit" class="btn-premium" style="width: 100%; justify-content: center;">
-                        SAUVEGARDER LES MODIFICATIONS
-                    </button>
-                </form>
-                <div
-                    style="margin-top: 2rem; padding: 1.5rem; background: #FFF9F5; border-radius: 16px; border: 1px solid rgba(255,102,0,0.1);">
-                    <p style="font-size: 0.8rem; color: var(--primary); font-weight: 500;">
-                        Note : Votre nom, prénom et domicile fiscal ne peuvent être modifiés que par l'administration.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: SUPPORT (Action 8) -->
-        <div id="tab-support" class="tab-content">
-            <header class="header-hero">
-                <h1 class="greeting">Support Client</h1>
-                <p style="color: var(--text-muted);">Assistance 24/7 pour vos opérations bancaires.</p>
-            </header>
-            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
-                <form id="supportForm">
-                    <div class="form-group">
-                        <label class="form-label">Sujet de votre demande</label>
-                        <select class="form-input">
-                            <option>Question sur un virement</option>
-                            <option>Activation de carte</option>
-                            <option>Contestation d'opération</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-input" style="height: 150px; resize: none;"
-                            placeholder="Décrivez votre problème ici..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Document joint (Optionnel)</label>
-                        <input type="file" class="form-input" style="padding: 0.75rem;">
-                    </div>
-                    <button class="btn-premium" style="width: 100%; justify-content: center;">ENVOYER LE TICKET</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- TAB: NOTIFICATIONS (Action 9) -->
-        <div id="tab-notifications" class="tab-content">
-            <header class="header-hero">
-                <h1 class="greeting">Centre de Notifications</h1>
-            </header>
-            <div class="dashboard-section" style="max-width: 800px; margin: 0 auto;">
-                <div id="notifList" style="display: grid; gap: 1rem;">
-                    <div
-                        style="padding: 1.5rem; background: var(--bg-light); border-radius: 20px; border: 1px solid var(--border); display: flex; gap: 1rem; align-items: flex-start;">
-                        <div style="background: var(--primary); color: white; padding: 0.5rem; border-radius: 10px;"><i
-                                data-lucide="info" size="20"></i></div>
-                        <div>
-                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Bienvenue sur GROUPBKCASH</div>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Votre dossier d'adhésion a été
-                                validé. Vous pouvez dès à présent demander l'activation de votre carte Visa.</p>
-                            <span
-                                style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; display: block;">Il
-                                y a 1 heure</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- MODAL: CARD REQUEST (Action 5) -->
-    <div class="modal-overlay" id="modalCardRequest">
-        <div class="modal-card">
-            <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800;">Activation de Carte</h2>
-            <div
-                style="background: var(--bg-light); padding: 2rem; border-radius: 24px; margin-bottom: 2.5rem; border: 1px solid var(--border);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <span style="font-weight: 600;">Frais Premium Visa Infinite</span>
-                    <span style="font-weight: 800; font-size: 1.5rem; color: var(--primary);">466,00 €</span>
-                </div>
-                <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                    <p>En confirmant cette demande, les frais seront déduits de votre solde principal. Votre carte sera
-                        active sous 24h après validation administrative.</p>
-                </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem;">
-                <button class="btn-premium" style="background: var(--bg-light); color: var(--dark);"
-                    onclick="closeModal('modalCardRequest')">ANNULER</button>
-                <button class="btn-premium" onclick="confirmCardActivation()">CONFIRMER LA DEMANDE</button>
-            </div>
-        </div>
+        <p>Chargement de votre espace sécurisé...</p>
     </div>
 
-    <!-- MODAL: TRANSFER FLOW (Action 10) -->
-    <div class="modal-overlay" id="modalTransfer">
-        <div class="modal-card" style="text-align: center;">
-            <div id="step-code">
-                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: 800;">Validation de Sécurité</h2>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem;">Veuillez saisir le code à 6
-                    chiffres envoyé à votre adresse email.</p>
-                <input type="text" id="transCode" class="form-input"
-                    style="text-align: center; font-size: 2rem; letter-spacing: 12px; font-weight: 800; font-family: 'Roboto Mono';"
-                    maxlength="6" placeholder="000000">
-                <button class="btn-premium" style="width: 100%; margin-top: 2rem; justify-content: center;"
-                    onclick="verifyTransferCode()">LANCER LE TRANSFERT</button>
-            </div>
+    <style>
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 
-            <div id="step-loading" style="display: none;">
-                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 800;" id="loadingTitle">Traitement
-                    Sécurisé...</h2>
-                <div class="progress-container" style="display: block;">
-                    <div class="progress-bar" id="transBar"></div>
-                </div>
-                <!-- Admin Message Hook -->
-                <div id="adminTask"
-                    style="display: none; background: #FFF5F1; border: 1px solid var(--primary); padding: 1.5rem; border-radius: 20px; margin-top: 1rem;">
-                    <p style="font-weight: 600; font-size: 0.9rem; color: var(--primary);" id="taskMsg">
-                        Action Requise : Contactez votre conseiller pour valider l'origine bancaire.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        async function routeUser() {
+            try {
+                // On vérifie la session MANUELLE (puisqu'on n'utilise plus Auth)
+                const email = localStorage.getItem('sb_user_email');
+                const role = localStorage.getItem('sb_user_role');
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/dashboard-client.js"></script>
-    <script> lucide.createIcons(); </script>
+                if (!email || isSessionExpired()) {
+                    clearAuthSession();
+                    window.location.href = './login.html';
+                    return;
+                }
+
+                // Redirection basée sur le rôle stocké lors du login
+                if (role && role.toUpperCase() === 'ADMIN') {
+                    window.location.href = './dashboard/admin/index.html';
+                } else {
+                    window.location.href = './dashboard/client/index.html';
+                }
+            } catch (err) {
+                console.error('Routing error:', err);
+                window.location.href = 'login.html';
+            }
+        }
+
+        routeUser();
+    </script>
 </body>
 
 </html>

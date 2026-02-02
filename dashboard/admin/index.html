@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - GROUPBKCASH</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/i18n.js"></script>
+    <script src="../../js/supabase-config.js"></script>
+    <script src="../../js/ui-utils.js"></script>
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="logo-text">GROUPBK<span>CASH</span></div>
+            </div>
+
+            <nav class="nav-links">
+                <div class="nav-group">
+                    <div class="nav-label" data-i18n="admin_nav_general">Général</div>
+                    <a href="#" class="nav-link active" data-tab="overview">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span data-i18n="admin_menu_overview">Vue d'ensemble</span>
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-label" data-i18n="admin_nav_clients">Gestion Clients</div>
+                    <a href="#" class="nav-link" data-tab="clients">
+                        <i data-lucide="users"></i>
+                        <span data-i18n="admin_nav_clients_list">Clients & Comptes</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="approvals">
+                        <i data-lucide="user-plus"></i>
+                        <span data-i18n="admin_menu_requests">Demandes d'adhésion</span>
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-label" data-i18n="admin_nav_operations">Opérations</div>
+                    <a href="#" class="nav-link" data-tab="transactions">
+                        <i data-lucide="arrow-right-left"></i>
+                        <span data-i18n="admin_nav_transactions">Transactions</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="cards">
+                        <i data-lucide="credit-card"></i>
+                        <span data-i18n="admin_nav_cards">Cartes Bancaires</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="fees">
+                        <i data-lucide="receipt"></i>
+                        <span data-i18n="admin_nav_fees">Frais & Paiements</span>
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-label" data-i18n="admin_nav_service">Service</div>
+                    <a href="#" class="nav-link" data-tab="support">
+                        <i data-lucide="message-square"></i>
+                        <span data-i18n="admin_nav_support">Tickets Support</span>
+                        <span class="badge badge-warning" id="pendingSupportCount" style="margin-left: auto;">0</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="notifications">
+                        <i data-lucide="bell"></i>
+                        <span data-i18n="admin_nav_comms">Communications</span>
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-label" data-i18n="admin_nav_system">Système</div>
+                    <a href="#" class="nav-link" data-tab="settings">
+                        <i data-lucide="settings"></i>
+                        <span data-i18n="admin_nav_settings">Paramètres</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="logs">
+                        <i data-lucide="file-text"></i>
+                        <span data-i18n="admin_nav_logs">Logs Audit</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i data-lucide="log-out"></i>
+                    <span data-i18n="admin_logout">Déconnexion</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="page-title">
+                    <h1 id="tabTitle" data-i18n="admin_menu_overview">Vue d'ensemble</h1>
+                    <p id="tabSubtitle" data-i18n="admin_subtitle_welcome">Bienvenue dans votre interface
+                        d'administration sécurisée.</p>
+                </div>
+
+                <div class="user-profile">
+                    <div class="avatar">AD</div>
+                    <div class="user-info-brief">
+                        <div style="font-weight: 600; font-size: 0.85rem;">Admin GroupBK</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">Accès sécurisé</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB: OVERVIEW -->
+            <section id="tab-overview" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <span class="badge badge-success">+12%</span>
+                        </div>
+                        <div class="stat-value" id="statTotalUsers">0</div>
+                        <div class="stat-label" data-i18n="admin_stat_active">Clients Actifs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">
+                                <i data-lucide="wallet"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="statTotalDeposits">0 €</div>
+                        <div class="stat-label" data-i18n="admin_stat_volume">Volume Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">
+                                <i data-lucide="clock"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="statPendingRequests">0</div>
+                        <div class="stat-label" data-i18n="admin_stat_pending">Dossiers en attente</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+                                <i data-lucide="alert-circle"></i>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="statAlerts">0</div>
+                        <div class="stat-label" data-i18n="admin_stat_alerts">Alertes Sécurité</div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="card-header">
+                        <h2 data-i18n="admin_table_recent_title">Dernières Demandes d'Ouverture de Compte</h2>
+                        <button class="btn btn-secondary btn-sm" onclick="switchTab('approvals')"
+                            data-i18n="admin_btn_see_all">Tout voir</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="recentRequestsTable">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Profession</th>
+                                    <th>Revenus</th>
+                                    <th>Statut</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: CLIENTS -->
+            <section id="tab-clients" class="tab-content">
+                <div class="table-card">
+                    <div class="card-header">
+                        <h2 data-i18n="admin_table_clients_title">Liste des Clients</h2>
+                        <div style="display: flex; gap: 1rem;">
+                            <input type="text" class="form-input" placeholder="Rechercher (Nom, Email, ID...)"
+                                id="searchClient" data-i18n-placeholder="admin_search_clients_placeholder">
+                            <button class="btn btn-primary" onclick="openModal('modalCreateClient')">
+                                <i data-lucide="user-plus"></i> <span data-i18n="admin_btn_create_client">Créer
+                                    Client</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="allClientsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID Client</th>
+                                    <th>Client</th>
+                                    <th>Solde</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: APPROVALS -->
+            <section id="tab-approvals" class="tab-content">
+                <!-- Similar to overview table but with more detail -->
+            </section>
+
+            <!-- TAB: TRANSACTIONS -->
+            <section id="tab-transactions" class="tab-content">
+                <div class="table-card">
+                    <div class="card-header">
+                        <h2 data-i18n="admin_table_trans_title">Historique Global des Transactions</h2>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn btn-secondary" onclick="exportTransactions()"
+                                data-i18n="admin_btn_export">Exporter CSV</button>
+                            <button class="btn btn-primary" onclick="openModal('modalManualTransaction')"
+                                data-i18n="admin_btn_new_trans">Nouvelle
+                                Transaction</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="globalTransactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Client</th>
+                                    <th>Type</th>
+                                    <th>Montant</th>
+                                    <th>Statut</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other tabs suppressed for length in this tool call, but will be handled in JS -->
+        </main>
+    </div>
+
+    <!-- MODAL: CREATE CLIENT -->
+    <div class="modal-overlay" id="modalCreateClient">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="admin_modal_create_title">Créer un nouveau compte client</h2>
+                <button onclick="closeModal('modalCreateClient')"
+                    style="background: none; border: none; color: white; cursor: pointer;"><i
+                        data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="createClientForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Prénom</label>
+                            <input type="text" class="form-input" required id="c_firstname">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nom</label>
+                            <input type="text" class="form-input" required id="c_lastname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" required id="c_email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mot de passe provisoire</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" class="form-input" id="c_password">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="generateRandomPass()">Générer</button>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="admin_label_client_id">ID Client (Généré si
+                                vide)</label>
+                            <input type="text" class="form-input" id="c_clientid" placeholder="BK-123-456">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="admin_label_acc_num">Numéro de Compte</label>
+                            <input type="text" class="form-input" id="c_accnum" placeholder="Auto-généré"
+                                data-i18n-placeholder="admin_label_auto_gen">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('modalCreateClient')"
+                    data-i18n="admin_btn_cancel">Annuler</button>
+                <button class="btn btn-primary" onclick="submitCreateClient()" data-i18n="admin_btn_create">Créer le
+                    compte</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CLIENT DETAILS -->
+    <div class="modal-overlay" id="modalClientDetails">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>Fiche Client : <span id="det_fullname">...</span></h2>
+                <button onclick="closeModal('modalClientDetails')"
+                    style="background: none; border: none; color: white; cursor: pointer;"><i
+                        data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" id="clientDetailBody">
+                <!-- Dynamically populated detail view -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="admin.js"></script>
+</body>
+
+</html>
